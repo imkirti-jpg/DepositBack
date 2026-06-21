@@ -1,0 +1,7 @@
+plan.md
+plan2.md
+.env
+.env.*
+venv/
+.env/
+alembic.ini
