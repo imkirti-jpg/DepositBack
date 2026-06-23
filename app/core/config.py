@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     SUPABASE_SERVICE_ROLE_KEY: str
     SUPABASE_JWKS_URL: str
     SUPABASE_URL: str
+    GEMINI_MODEL:str
+    STORAGE_BUCKET:str
+    ENVIRONMENT:str
+    MAX_UPLOAD_SIZE_MB:int
 
     class Config:
         env_file = ".env"

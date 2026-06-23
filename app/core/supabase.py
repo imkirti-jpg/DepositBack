@@ -12,3 +12,13 @@ async def get_supabase_client() -> AsyncClient:
             settings.SUPABASE_SERVICE_ROLE_KEY  # server-side only
         )
     return _supabase_client
+
+#Temp
+from supabase import create_client, Client
+
+from app.core.config import settings
+
+supabase: Client = create_client(
+    settings.SUPABASE_URL,
+    settings.SUPABASE_ANON_KEY
+)

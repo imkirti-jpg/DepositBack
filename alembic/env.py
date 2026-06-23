@@ -7,6 +7,7 @@ from alembic import context
 
 from alembic import context
 from app.core.config import settings
+from app.models.users import User , UserPreferences
 
 config = context.config
 
