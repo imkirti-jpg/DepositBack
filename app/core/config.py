@@ -14,7 +14,12 @@ class Settings(BaseSettings):
     STORAGE_BUCKET:str
     ENVIRONMENT:str
     MAX_UPLOAD_SIZE_MB:int
+    SUPABASE_JWT_SECRET: str    
 
+    @property
+    def max_upload_size_bytes(self) -> int:
+        return self.MAX_UPLOAD_SIZE_MB * 1024 * 1024
+    
     class Config:
         env_file = ".env"
 
