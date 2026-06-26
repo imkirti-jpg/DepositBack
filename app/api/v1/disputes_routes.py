@@ -21,24 +21,16 @@ from app.services.dispute_engine import analyze_notice
 from app.services.storage_service import StorageError, download_file, upload_file
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/deduction-notices", tags=["disputes"])
+
+# Two separate routers — mounted at different prefixes in main.py
+notices_router = APIRouter(prefix="/deduction-notices", tags=["disputes"])
+claims_router = APIRouter( prefix="/claims", tags=["claims"])
 
 
-# Bg task 
+# ── Background task 
 
 async def _run_analysis(notice_id: uuid.UUID) -> None:
-    """
-    Runs after POST /deduction-notices response is sent.
-
-    Flow:
-      1. Load the notice, property's lease fields, and all evidence rows.
-      2. Download the notice file if one was uploaded.
-      3. Call dispute_engine.analyze_notice (two AI passes).
-      4. Insert one Claim row per analyzed item.
-      5. Set notice status = completed or failed.
-    """
     async with SessionLocal() as db:
-        # Load notice
         result = await db.execute(select(DeductionNotice).where(DeductionNotice.id == notice_id))
         notice = result.scalar_one_or_none()
         if notice is None:
@@ -46,7 +38,6 @@ async def _run_analysis(notice_id: uuid.UUID) -> None:
             return
 
         try:
-            # Load lease extracted_fields for this property (most recent confirmed lease)
             lease_result = await db.execute(
                 select(Lease)
                 .where(
@@ -57,9 +48,7 @@ async def _run_analysis(notice_id: uuid.UUID) -> None:
                 .limit(1)
             )
             lease = lease_result.scalar_one_or_none()
-            lease_fields = lease.extracted_fields if lease else None
 
-            # Load all evidence rows for this property
             evidence_result = await db.execute(
                 select(Evidence).where(Evidence.property_id == notice.property_id)
             )
@@ -73,23 +62,20 @@ async def _run_analysis(notice_id: uuid.UUID) -> None:
                 for ev in evidence_result.scalars().all()
             ]
 
-            # Download notice file if present
             notice_file_bytes = None
             notice_mime_type = None
             if notice.file_url:
                 notice_file_bytes, notice_mime_type = download_file(notice.file_url)
 
-            # Run the two-pass analysis
             analyzed_claims = await analyze_notice(
                 notice_text=notice.raw_text,
                 notice_file_bytes=notice_file_bytes,
                 notice_mime_type=notice_mime_type,
-                lease_fields=lease_fields,
+                lease_fields=lease.extracted_fields if lease else None,
                 evidence_rows=evidence_rows,
                 ai_client=ai_client,
             )
 
-            # Insert one Claim row per result
             supported_count = 0
             for item in analyzed_claims:
                 label_str = item.get("label", "unclear")
@@ -112,8 +98,8 @@ async def _run_analysis(notice_id: uuid.UUID) -> None:
                 db.add(claim)
 
             notice.status = NoticeStatus.completed
-
             await db.commit()
+
             await track(
                 db,
                 "claims_analyzed",
@@ -127,29 +113,21 @@ async def _run_analysis(notice_id: uuid.UUID) -> None:
         except (AIClientError, StorageError) as exc:
             logger.error("Analysis failed for notice %s: %s", notice_id, exc)
             notice.status = NoticeStatus.failed
-            #notice.updated_at = datetime.now(timezone.utc)
             db.add(notice)
             await db.commit()
 
 
+#  Notice routes 
 
-
-@router.post("", response_model=NoticeResponse, status_code=status.HTTP_202_ACCEPTED)
+@notices_router.post("", response_model=NoticeResponse, status_code=status.HTTP_202_ACCEPTED)
 async def create_deduction_notice(
     background_tasks: BackgroundTasks,
     property_id: uuid.UUID = Form(...),
-    # User can upload a file, paste text, or both
     file: UploadFile | None = File(None),
     raw_text: str | None = Form(None),
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """
-    Submit a deduction notice for analysis.
-    Accepts a file upload (photo/PDF of the notice), pasted text, or both.
-    Returns 202 immediately — analysis runs in the background.
-    Poll GET /deduction-notices/{id} until status leaves "processing".
-    """
     if not file and not raw_text:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -165,11 +143,7 @@ async def create_deduction_notice(
         except StorageError as exc:
             raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(exc))
 
-    notice = DeductionNotice(
-        property_id=property_id,
-        file_url=file_url,
-        raw_text=raw_text,
-    )
+    notice = DeductionNotice(property_id=property_id, file_url=file_url, raw_text=raw_text)
     db.add(notice)
     await db.commit()
     await db.refresh(notice)
@@ -190,32 +164,21 @@ async def create_deduction_notice(
     return notice
 
 
-@router.get("/{notice_id}", response_model=NoticeResponse)
+@notices_router.get("/{notice_id}", response_model=NoticeResponse)
 async def get_notice(
     notice_id: uuid.UUID,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """
-    Poll this endpoint after POST /deduction-notices.
-    When status = completed, fetch claims from GET /deduction-notices/{id}/claims.
-    When status = failed, re-submit the notice.
-    """
     return await _get_owned_notice(notice_id, current_user, db)
 
 
-@router.get("/{notice_id}/claims", response_model=list[ClaimResponse])
+@notices_router.get("/{notice_id}/claims", response_model=list[ClaimResponse])
 async def list_claims(
     notice_id: uuid.UUID,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """
-    Returns the full claim-by-claim breakdown once analysis is complete.
-    Returns an empty list while status is still "processing".
-    Each claim includes the AI label, reasoning, evidence_refs,
-    and effective_label (user override takes precedence if set).
-    """
     await _get_owned_notice(notice_id, current_user, db)
 
     result = await db.execute(
@@ -227,19 +190,15 @@ async def list_claims(
     return [ClaimResponse.from_orm_with_effective(c) for c in claims]
 
 
-@router.put("/claims/{claim_id}", response_model=ClaimResponse)
+#  Claim routes 
+
+@claims_router.put("/{claim_id}", response_model=ClaimResponse)
 async def override_claim_label(
     claim_id: uuid.UUID,
     body: ClaimOverride,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """
-    Save a user override on a single claim's label.
-    Both the original AI label and the override are stored —
-    the override never erases what the model produced.
-    effective_label in the response will reflect the override.
-    """
     claim = await _get_owned_claim(claim_id, current_user, db)
     claim.user_override_label = body.user_override_label
     db.add(claim)

@@ -5,6 +5,7 @@ from sqlalchemy import DateTime, Enum, Numeric, String, Text, ForeignKey, Date
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from app.db.database import Base
+from decimal import Decimal
 
 
 class PropertyStatus(str, enum.Enum):
@@ -19,7 +20,7 @@ class Property(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, index=True)
     label: Mapped[str] = mapped_column(String(200), nullable=False)          # e.g. "2BHK Indiranagar"
     address: Mapped[str | None] = mapped_column(Text, nullable=True)
-    deposit_amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
+    deposit_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
     lease_start_date: Mapped[datetime | None] = mapped_column(Date, nullable=True)
     lease_end_date: Mapped[datetime | None] = mapped_column(Date, nullable=True)
     status: Mapped[PropertyStatus] = mapped_column(Enum(PropertyStatus, name="property_status"),nullable=False,default=PropertyStatus.active)
