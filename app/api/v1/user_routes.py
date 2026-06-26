@@ -34,7 +34,7 @@ async def update_me(
     await track(db, "profile_updated", user_id=current_user.id, properties={"city": current_user.city})
     return current_user
 
-    
+
 #temp
 from supabase import create_client
 
@@ -50,4 +50,3 @@ response = supabase.auth.sign_in_with_password(
     }
 )
 print(response.session.access_token)
-

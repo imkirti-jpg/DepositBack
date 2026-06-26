@@ -16,7 +16,7 @@ class Property(Base):
     __tablename__ = "properties"
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("profiles.id"), nullable=False, index=True)
+    user_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, index=True)
     label: Mapped[str] = mapped_column(String(200), nullable=False)          # e.g. "2BHK Indiranagar"
     address: Mapped[str | None] = mapped_column(Text, nullable=True)
     deposit_amount: Mapped[float] = mapped_column(Numeric(12, 2), nullable=False)
