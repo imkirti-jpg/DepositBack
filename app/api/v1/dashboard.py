@@ -82,7 +82,7 @@ async def get_dashboard(
     if notice:
         claims_result = await db.execute(
             select(Claim)
-            .where(Claim.deduction_notice_id == notice.id)
+            .where(Claim.deduction_notice_id == notice.id, Claim.is_active == True)
             .order_by(Claim.created_at.asc())
         )
         claims = list(claims_result.scalars().all())
@@ -97,7 +97,7 @@ async def get_dashboard(
     # Documents
     docs_result = await db.execute(
         select(GeneratedDocument)
-        .where(GeneratedDocument.property_id == property_id)
+        .where(GeneratedDocument.property_id == property_id, GeneratedDocument.is_active == True)
         .order_by(GeneratedDocument.created_at.desc())
     )
 

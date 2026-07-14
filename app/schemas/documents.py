@@ -20,6 +20,7 @@ class DocumentResponse(BaseModel):
     deduction_notice_id: uuid.UUID | None
     doc_type: DocType
     status: DocStatus
+    error_message: str | None = None
     ai_draft: str | None
     edited_content: str | None
     sent_at: datetime | None

@@ -26,3 +26,5 @@ class Property(Base):
     status: Mapped[PropertyStatus] = mapped_column(Enum(PropertyStatus, name="property_status"),nullable=False,default=PropertyStatus.active)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),nullable=False, default=lambda: datetime.now(timezone.utc))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),nullable=False,  default=lambda: datetime.now(timezone.utc),onupdate=lambda: datetime.now(timezone.utc))
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    deleted_by: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), nullable=True)

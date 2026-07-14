@@ -73,3 +73,18 @@ def download_file(path: str) -> tuple[bytes, str]:
 
 def get_public_url(path: str) -> str:
     return _supabase.storage.from_(settings.STORAGE_BUCKET).get_public_url(path)
+
+
+def delete_file(path: str) -> None:
+    try:
+        _supabase.storage.from_(settings.STORAGE_BUCKET).remove([path])
+    except Exception as exc:
+        logger.exception("Storage delete failed for path %s", path)
+        raise StorageError("Could not delete the file from storage.") from exc
+
+
+def get_thumbnail_url(path: str) -> str:
+    ext = path.rsplit(".", 1)[-1].lower()
+    if ext in ("jpg", "jpeg", "png", "webp", "heic", "heif"):
+        return f"{settings.SUPABASE_URL}/storage/v1/render/image/public/{settings.STORAGE_BUCKET}/{path}?width=200&height=200&resize=cover"
+    return get_public_url(path)

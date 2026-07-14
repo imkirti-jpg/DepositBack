@@ -1,0 +1,60 @@
+{
+  "raw_text": "{\n  \"summary\": {\n    \"supported_amount\": 0,\n    \"unsupported_amount\": 750,\n    \"unclear_amount\": 250\n  },\n  \"claims\": [\n    {\n      \"title\": \"Carpet cleaning\",\n      \"amount\": 250,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.5,\n      \"reasoning\": \"The lease requires the tenant to leave the property 'reasonably clean' (clause_cleaning_requirement) but does not mandate professional carpet cleaning. The provided move-in and move-out evidence (db8ad049-bf06-4125-834f-36b694330158, 35e4b63b-dc27-4bd7-af09-8d8845993ec8) does not contain specific notes or visual evidence regarding the condition of the carpets at either time. Without evidence demonstrating that the carpets were not left reasonably clean, it is unclear if the tenant failed to meet the lease requirement.\",\n      \"needed_evidence\": [\n        \"Move-in inspection report or photos specifically showing the condition of the carpets.\",\n        \"Move-out inspection report or photos specifically showing the condition of the carpets, indicating a lack of reasonable cleanliness.\",\n        \"Invoice for the carpet cleaning service.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_cleaning_requirement\"\n      ],\n      \"evidence_ids\": [\n        \"db8ad049-bf06-4125-834f-36b694330158\",\n        \"35e4b63b-dc27-4bd7-af09-8d8845993ec8\"\n      ]\n    },\n    {\n      \"title\": \"Wall repainting\",\n      \"amount\": 600,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 0.8,\n      \"reasoning\": \"The lease does not contain any clause requiring the tenant to repaint walls or cover the cost of repainting. Repainting due to normal wear and tear is typically the landlord's responsibility. There is no evidence provided (db8ad049-bf06-4125-834f-36b694330158, 35e4b63b-dc27-4bd7-af09-8d8845993ec8) to indicate specific damage to the walls beyond normal wear and tear that would justify this deduction.\",\n      \"needed_evidence\": [\n        \"Lease clause making the tenant responsible for repainting or for damage to walls beyond normal wear and tear.\",\n        \"Move-in and move-out inspection reports or photos clearly showing specific damage to the walls caused by the tenant beyond normal wear and tear.\"\n      ],\n      \"lease_clause_ids\": [],\n      \"evidence_ids\": [\n        \"db8ad049-bf06-4125-834f-36b694330158\",\n        \"35e4b63b-dc27-4bd7-af09-8d8845993ec8\"\n      ]\n    },\n    {\n      \"title\": \"Trash removal\",\n      \"amount\": 150,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 0.9,\n      \"reasoning\": \"The lease explicitly states in 'clause_utilities' that 'Landlord pays water and trash.' This clause assigns responsibility for trash services to the landlord, not the tenant. Therefore, a deduction for trash removal is directly contradicted by the lease agreement.\",\n      \"needed_evidence\": [],\n      \"lease_clause_ids\": [\n        \"clause_utilities\"\n      ],\n      \"evidence_ids\": []\n    }\n  ]\n}",
+  "parsed": {
+    "summary": {
+      "supported_amount": 0,
+      "unsupported_amount": 750,
+      "unclear_amount": 250
+    },
+    "claims": [
+      {
+        "title": "Carpet cleaning",
+        "amount": 250,
+        "verdict": "unclear",
+        "confidence": 0.5,
+        "reasoning": "The lease requires the tenant to leave the property 'reasonably clean' (clause_cleaning_requirement) but does not mandate professional carpet cleaning. The provided move-in and move-out evidence (db8ad049-bf06-4125-834f-36b694330158, 35e4b63b-dc27-4bd7-af09-8d8845993ec8) does not contain specific notes or visual evidence regarding the condition of the carpets at either time. Without evidence demonstrating that the carpets were not left reasonably clean, it is unclear if the tenant failed to meet the lease requirement.",
+        "needed_evidence": [
+          "Move-in inspection report or photos specifically showing the condition of the carpets.",
+          "Move-out inspection report or photos specifically showing the condition of the carpets, indicating a lack of reasonable cleanliness.",
+          "Invoice for the carpet cleaning service."
+        ],
+        "lease_clause_ids": [
+          "clause_cleaning_requirement"
+        ],
+        "evidence_ids": [
+          "db8ad049-bf06-4125-834f-36b694330158",
+          "35e4b63b-dc27-4bd7-af09-8d8845993ec8"
+        ]
+      },
+      {
+        "title": "Wall repainting",
+        "amount": 600,
+        "verdict": "unsupported",
+        "confidence": 0.8,
+        "reasoning": "The lease does not contain any clause requiring the tenant to repaint walls or cover the cost of repainting. Repainting due to normal wear and tear is typically the landlord's responsibility. There is no evidence provided (db8ad049-bf06-4125-834f-36b694330158, 35e4b63b-dc27-4bd7-af09-8d8845993ec8) to indicate specific damage to the walls beyond normal wear and tear that would justify this deduction.",
+        "needed_evidence": [
+          "Lease clause making the tenant responsible for repainting or for damage to walls beyond normal wear and tear.",
+          "Move-in and move-out inspection reports or photos clearly showing specific damage to the walls caused by the tenant beyond normal wear and tear."
+        ],
+        "lease_clause_ids": [],
+        "evidence_ids": [
+          "db8ad049-bf06-4125-834f-36b694330158",
+          "35e4b63b-dc27-4bd7-af09-8d8845993ec8"
+        ]
+      },
+      {
+        "title": "Trash removal",
+        "amount": 150,
+        "verdict": "unsupported",
+        "confidence": 0.9,
+        "reasoning": "The lease explicitly states in 'clause_utilities' that 'Landlord pays water and trash.' This clause assigns responsibility for trash services to the landlord, not the tenant. Therefore, a deduction for trash removal is directly contradicted by the lease agreement.",
+        "needed_evidence": [],
+        "lease_clause_ids": [
+          "clause_utilities"
+        ],
+        "evidence_ids": []
+      }
+    ]
+  },
+  "retried": false
+}

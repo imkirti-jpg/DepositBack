@@ -1,0 +1,23 @@
+{
+  "raw_text": "{\n  \"claims\": [\n    {\n      \"item_description\": \"Carpet cleaning\",\n      \"claimed_amount\": 250,\n      \"currency\": \"$\"\n    },\n    {\n      \"item_description\": \"Wall repainting\",\n      \"claimed_amount\": 600,\n      \"currency\": \"$\"\n    },\n    {\n      \"item_description\": \"Trash removal\",\n      \"claimed_amount\": 150,\n      \"currency\": \"$\"\n    }\n  ]\n}",
+  "parsed": {
+    "claims": [
+      {
+        "item_description": "Carpet cleaning",
+        "claimed_amount": 250,
+        "currency": "$"
+      },
+      {
+        "item_description": "Wall repainting",
+        "claimed_amount": 600,
+        "currency": "$"
+      },
+      {
+        "item_description": "Trash removal",
+        "claimed_amount": 150,
+        "currency": "$"
+      }
+    ]
+  },
+  "retried": false
+}

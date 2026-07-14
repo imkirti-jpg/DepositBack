@@ -6,79 +6,59 @@ logger = logging.getLogger(__name__)
 _RESPONSE_SCHEMA = {
     "type": "object",
     "properties": {
-        "deposit_amount": {
+        "property_address": {"type": "string"},
+        "tenant_name": {"type": "string"},
+        "landlord_name": {"type": "string"},
+        "lease_start_date": {"type": "string"},
+        "lease_end_date": {"type": "string"},
+        "monthly_rent": {"type": "string"},
+        "security_deposit": {"type": "string"},
+        "utilities": {
             "type": "object",
             "properties": {
-                "value": {"type": "string"},
-                "currency": {"type": "string"},
-                "confidence": {"type": "string"},
+                "tenant_pays": {"type": "array", "items": {"type": "string"}},
+                "landlord_pays": {"type": "array", "items": {"type": "string"}},
             },
         },
-        "notice_period": {
-            "type": "object",
-            "properties": {
-                "value": {"type": "string"},
-                "days": {"type": "number"},
-                "confidence": {"type": "string"},
+        "move_out_cleaning_required": {"type": "boolean"},
+        "professional_cleaning_required": {"type": "boolean"},
+        "painting_required": {"type": "boolean"},
+        "tenant_responsible_for_damage": {"type": "boolean"},
+        "tenant_responsible_for_fixtures": {"type": "boolean"},
+        "late_fees": {"type": "string"},
+        "other_obligations": {"type": "array", "items": {"type": "string"}},
+        "clauses": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "string"},
+                    "title": {"type": "string"},
+                    "text": {"type": "string"},
+                },
             },
         },
-        "lock_in_period": {
-            "type": "object",
-            "properties": {
-                "value": {"type": "string"},
-                "confidence": {"type": "string"},
-            },
-        },
-        "refund_timeline": {
-            "type": "object",
-            "properties": {
-                "value": {"type": "string"},
-                "confidence": {"type": "string"},
-            },
-        },
-        "deductible_categories": {
-            "type": "object",
-            "properties": {
-                "value": {"type": "array", "items": {"type": "string"}},
-                "confidence": {"type": "string"},
-            },
-        },
-        "move_out_obligations": {
-            "type": "object",
-            "properties": {
-                "value": {"type": "array", "items": {"type": "string"}},
-                "confidence": {"type": "string"},
-            },
-        },
-        "deduction_clauses": {
-            "type": "object",
-            "properties": {
-                "value": {"type": "string"},
-                "confidence": {"type": "string"},
-            },
-        },
-        "low_confidence_fields": {"type": "array", "items": {"type": "string"}},
-        "extraction_notes": {"type": "string"},
     },
 }
 
 _SYSTEM_PROMPT_EXTRA = """
-You are extracting structured fields from an Indian residential lease agreement.
-The document may be a photographed page, a scanned PDF, or typed text.
+You are an expert legal document parser.
+Your job is ONLY to extract information from the lease.
 
-For every field:
-- Set confidence to "high" if the value is explicitly stated in the document.
-- Set confidence to "medium" if you inferred it from context or standard practice.
-- Set confidence to "low" if the document is ambiguous on this point.
-- Set confidence to "unclear" if the document does not address this at all.
+Do not infer.
+Do not guess.
+Do not summarize.
 
-Always populate low_confidence_fields with the key names of every field
-whose confidence is "low" or "unclear". The frontend uses this list to
-prompt the user to confirm those values — never leave it empty if any
-field has low or unclear confidence.
-
-Never guess a deposit amount or date if it is not visible in the document.
-If a field is not present, set its value to null and confidence to "unclear".
+Rules:
+1. If a clause is not explicitly stated, leave the field null or false.
+2. Never invent clauses.
+3. Every clause must contain the original wording from the lease.
+4. Never state that a lease contains a clause unless it appears verbatim.
+5. Never assume standard landlord practices.
+6. Never assume local laws unless explicitly provided.
+7. If information is missing, state "Not found in provided documents."
+8. Never fabricate clause IDs (use prefix like "clause_" or similar clear identifier).
+9. Confidence should reflect only the provided documents.
 """
 
 
@@ -86,6 +66,7 @@ async def extract_lease_fields(
     file_bytes: bytes,
     mime_type: str,
     ai_client: AIClient,
+    lease_id: str | None = None,
 ) -> dict:
     """
     Run extraction on a lease file. Returns the extracted_fields dict.
@@ -99,6 +80,7 @@ async def extract_lease_fields(
         response_schema=_RESPONSE_SCHEMA,
         system_prompt_extra=_SYSTEM_PROMPT_EXTRA,
         temperature=0.1,   # factual extraction — as deterministic as possible
+        document_id=str(lease_id) if lease_id else None,
     )
     response = await ai_client.call(request)
     if response.retried:

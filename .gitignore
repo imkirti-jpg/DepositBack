@@ -5,3 +5,5 @@ plan2.md
 venv/
 .env/
 alembic.ini
+__pycache__/
+*.py[cod]

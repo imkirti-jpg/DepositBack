@@ -1,0 +1,112 @@
+{
+  "raw_text": "{\n  \"property_address\": \"Flat No. 302, Sunrise Residency, 12th Main Road, Indiranagar, Bengaluru 560038.\",\n  \"tenant_name\": \"Kirti Singh\",\n  \"landlord_name\": \"Rajesh Sharma\",\n  \"lease_start_date\": \"01 January 2026\",\n  \"lease_end_date\": \"31 December 2026\",\n  \"monthly_rent\": \"INR 28,000 payable on or before the 5th of every month.\",\n  \"security_deposit\": \"INR 84,000 refundable within 30 days after move-out, subject to lawful deductions.\",\n  \"utilities\": {\n    \"tenant_pays\": [\n      \"electricity\",\n      \"internet\",\n      \"cooking gas\"\n    ],\n    \"landlord_pays\": [\n      \"property tax\",\n      \"building maintenance\"\n    ]\n  },\n  \"move_out_cleaning_required\": true,\n  \"professional_cleaning_required\": false,\n  \"painting_required\": false,\n  \"tenant_responsible_for_damage\": true,\n  \"tenant_responsible_for_fixtures\": true,\n  \"late_fees\": null,\n  \"other_obligations\": [\n    \"Tenant keeps premises clean and reports issues.\",\n    \"Return keys\",\n    \"remove belongings\"\n  ],\n  \"clauses\": [\n    {\n      \"id\": \"clause_lease_agreement_details\",\n      \"title\": \"RESIDENTIAL LEASE AGREEMENT\",\n      \"text\": \"Lease Agreement Number: LA-2026-1048\\nDate: 01 January 2026\"\n    },\n    {\n      \"id\": \"clause_landlord\",\n      \"title\": \"Landlord\",\n      \"text\": \"Landlord\\nRajesh Sharma\\n18 Green Park Extension, Bengaluru, Karnataka 560016\"\n    },\n    {\n      \"id\": \"clause_tenant\",\n      \"title\": \"Tenant\",\n      \"text\": \"Tenant\\nKirti Singh\\nFlat 302, Sunrise Residency, Indiranagar, Bengaluru 560038\"\n    },\n    {\n      \"id\": \"clause_property\",\n      \"title\": \"Property\",\n      \"text\": \"Property\\nFlat No. 302, Sunrise Residency, 12th Main Road, Indiranagar, Bengaluru 560038.\"\n    },\n    {\n      \"id\": \"clause_lease_term\",\n      \"title\": \"Lease Term\",\n      \"text\": \"Lease Term\\nStart Date: 01 January 2026\\nEnd Date: 31 December 2026\"\n    },\n    {\n      \"id\": \"clause_monthly_rent\",\n      \"title\": \"Monthly Rent\",\n      \"text\": \"Monthly Rent\\nINR 28,000 payable on or before the 5th of every month.\"\n    },\n    {\n      \"id\": \"clause_security_deposit\",\n      \"title\": \"Security Deposit\",\n      \"text\": \"Security Deposit\\nINR 84,000 refundable within 30 days after move-out, subject to lawful deductions.\"\n    },\n    {\n      \"id\": \"clause_permitted_deductions\",\n      \"title\": \"Permitted Deductions\",\n      \"text\": \"Permitted Deductions\\n- Unpaid rent\\n- Unpaid utility bills\\n- Damage beyond normal wear and tear\\n- Broken fixtures caused by negligence\\n- Missing keys/access cards\\n- Excessive cleaning costs\\n- Unauthorized alterations\"\n    },\n    {\n      \"id\": \"clause_not_permitted_as_deductions\",\n      \"title\": \"Not Permitted as Deductions\",\n      \"text\": \"Not Permitted as Deductions\\n- Normal wear and tear\\n- Minor paint fading\\n- Small nail holes\\n- Ordinary carpet wear\\n- Natural appliance aging\"\n    },\n    {\n      \"id\": \"clause_maintenance\",\n      \"title\": \"Maintenance\",\n      \"text\": \"Maintenance\\nTenant keeps premises clean and reports issues. Landlord maintains plumbing, electrical systems, and structure.\"\n    },\n    {\n      \"id\": \"clause_painting\",\n      \"title\": \"Painting\",\n      \"text\": \"Painting\\nNo repainting charge for normal fading. Charges apply only for intentional damage or unauthorized painting.\"\n    },\n    {\n      \"id\": \"clause_notice_period\",\n      \"title\": \"Notice Period\",\n      \"text\": \"Notice Period\\n30 calendar days written notice by either party.\"\n    },\n    {\n      \"id\": \"clause_utilities\",\n      \"title\": \"Utilities\",\n      \"text\": \"Utilities\\nTenant: electricity, internet, cooking gas.\\nLandlord: property tax and building maintenance.\"\n    },\n    {\n      \"id\": \"clause_move_out\",\n      \"title\": \"Move-Out\",\n      \"text\": \"Move-Out\\nReturn keys, remove belongings, leave premises broom-clean. Joint inspection before deposit settlement.\"\n    },\n    {\n      \"id\": \"clause_signatures\",\n      \"title\": \"Signatures\",\n      \"text\": \"Signatures\\nLandlord: Rajesh Sharma\\nTenant: Kirti Singh\"\n    }\n  ]\n}",
+  "parsed": {
+    "property_address": "Flat No. 302, Sunrise Residency, 12th Main Road, Indiranagar, Bengaluru 560038.",
+    "tenant_name": "Kirti Singh",
+    "landlord_name": "Rajesh Sharma",
+    "lease_start_date": "01 January 2026",
+    "lease_end_date": "31 December 2026",
+    "monthly_rent": "INR 28,000 payable on or before the 5th of every month.",
+    "security_deposit": "INR 84,000 refundable within 30 days after move-out, subject to lawful deductions.",
+    "utilities": {
+      "tenant_pays": [
+        "electricity",
+        "internet",
+        "cooking gas"
+      ],
+      "landlord_pays": [
+        "property tax",
+        "building maintenance"
+      ]
+    },
+    "move_out_cleaning_required": true,
+    "professional_cleaning_required": false,
+    "painting_required": false,
+    "tenant_responsible_for_damage": true,
+    "tenant_responsible_for_fixtures": true,
+    "late_fees": null,
+    "other_obligations": [
+      "Tenant keeps premises clean and reports issues.",
+      "Return keys",
+      "remove belongings"
+    ],
+    "clauses": [
+      {
+        "id": "clause_lease_agreement_details",
+        "title": "RESIDENTIAL LEASE AGREEMENT",
+        "text": "Lease Agreement Number: LA-2026-1048\nDate: 01 January 2026"
+      },
+      {
+        "id": "clause_landlord",
+        "title": "Landlord",
+        "text": "Landlord\nRajesh Sharma\n18 Green Park Extension, Bengaluru, Karnataka 560016"
+      },
+      {
+        "id": "clause_tenant",
+        "title": "Tenant",
+        "text": "Tenant\nKirti Singh\nFlat 302, Sunrise Residency, Indiranagar, Bengaluru 560038"
+      },
+      {
+        "id": "clause_property",
+        "title": "Property",
+        "text": "Property\nFlat No. 302, Sunrise Residency, 12th Main Road, Indiranagar, Bengaluru 560038."
+      },
+      {
+        "id": "clause_lease_term",
+        "title": "Lease Term",
+        "text": "Lease Term\nStart Date: 01 January 2026\nEnd Date: 31 December 2026"
+      },
+      {
+        "id": "clause_monthly_rent",
+        "title": "Monthly Rent",
+        "text": "Monthly Rent\nINR 28,000 payable on or before the 5th of every month."
+      },
+      {
+        "id": "clause_security_deposit",
+        "title": "Security Deposit",
+        "text": "Security Deposit\nINR 84,000 refundable within 30 days after move-out, subject to lawful deductions."
+      },
+      {
+        "id": "clause_permitted_deductions",
+        "title": "Permitted Deductions",
+        "text": "Permitted Deductions\n- Unpaid rent\n- Unpaid utility bills\n- Damage beyond normal wear and tear\n- Broken fixtures caused by negligence\n- Missing keys/access cards\n- Excessive cleaning costs\n- Unauthorized alterations"
+      },
+      {
+        "id": "clause_not_permitted_as_deductions",
+        "title": "Not Permitted as Deductions",
+        "text": "Not Permitted as Deductions\n- Normal wear and tear\n- Minor paint fading\n- Small nail holes\n- Ordinary carpet wear\n- Natural appliance aging"
+      },
+      {
+        "id": "clause_maintenance",
+        "title": "Maintenance",
+        "text": "Maintenance\nTenant keeps premises clean and reports issues. Landlord maintains plumbing, electrical systems, and structure."
+      },
+      {
+        "id": "clause_painting",
+        "title": "Painting",
+        "text": "Painting\nNo repainting charge for normal fading. Charges apply only for intentional damage or unauthorized painting."
+      },
+      {
+        "id": "clause_notice_period",
+        "title": "Notice Period",
+        "text": "Notice Period\n30 calendar days written notice by either party."
+      },
+      {
+        "id": "clause_utilities",
+        "title": "Utilities",
+        "text": "Utilities\nTenant: electricity, internet, cooking gas.\nLandlord: property tax and building maintenance."
+      },
+      {
+        "id": "clause_move_out",
+        "title": "Move-Out",
+        "text": "Move-Out\nReturn keys, remove belongings, leave premises broom-clean. Joint inspection before deposit settlement."
+      },
+      {
+        "id": "clause_signatures",
+        "title": "Signatures",
+        "text": "Signatures\nLandlord: Rajesh Sharma\nTenant: Kirti Singh"
+      }
+    ]
+  },
+  "retried": false
+}

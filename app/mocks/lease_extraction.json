@@ -1,0 +1,32 @@
+{
+  "property_address": "Flat 304, Green Glen Layout, Bellandur, Bangalore 560103",
+  "tenant_name": "Kirti Singh",
+  "landlord_name": "Ramesh Kumar",
+  "lease_start_date": "2025-01-01",
+  "lease_end_date": "2025-12-31",
+  "monthly_rent": "30000",
+  "security_deposit": "90000",
+  "utilities": {
+    "tenant_pays": ["electricity", "water", "internet"],
+    "landlord_pays": ["society maintenance"]
+  },
+  "move_out_cleaning_required": true,
+  "professional_cleaning_required": false,
+  "painting_required": false,
+  "tenant_responsible_for_damage": true,
+  "tenant_responsible_for_fixtures": false,
+  "late_fees": "INR 500 per day",
+  "other_obligations": ["Keep the property clean"],
+  "clauses": [
+    {
+      "id": "clause_1",
+      "title": "Security Deposit",
+      "text": "The Tenant shall deposit a sum of INR 90,000 as security deposit. The deposit shall be refunded within 30 days of vacant possession, subject to deduction for any unpaid rent, utilities or physical damage beyond normal wear and tear."
+    },
+    {
+      "id": "clause_2",
+      "title": "Painting",
+      "text": "The Landlord shall be responsible for painting the flat before occupancy and upon expiration of lease unless there is damage to walls."
+    }
+  ]
+}

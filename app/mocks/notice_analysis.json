@@ -1,0 +1,39 @@
+{
+  "summary": {
+    "supported_amount": 0,
+    "unsupported_amount": 1000.00,
+    "unclear_amount": 0
+  },
+  "claims": [
+    {
+      "title": "Carpet cleaning",
+      "amount": 250.00,
+      "verdict": "unsupported",
+      "confidence": 0.9,
+      "reasoning": "The lease does not require professional or move-out cleaning by the tenant. Normal wear and tear is excluded.",
+      "needed_evidence": [],
+      "lease_clause_ids": ["clause_1"],
+      "evidence_ids": []
+    },
+    {
+      "title": "Wall repainting",
+      "amount": 600.00,
+      "verdict": "unsupported",
+      "confidence": 0.95,
+      "reasoning": "Clause 2 explicitly states the landlord is responsible for repainting upon expiration of the lease.",
+      "needed_evidence": [],
+      "lease_clause_ids": ["clause_2"],
+      "evidence_ids": []
+    },
+    {
+      "title": "Trash removal",
+      "amount": 150.00,
+      "verdict": "unsupported",
+      "confidence": 0.85,
+      "reasoning": "No move-out cleaning requirement is specified in the lease clauses.",
+      "needed_evidence": [],
+      "lease_clause_ids": ["clause_1"],
+      "evidence_ids": []
+    }
+  ]
+}

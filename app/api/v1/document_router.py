@@ -15,99 +15,11 @@ from app.models.users import User
 from app.models.property import Property
 from app.api.v1.property_routes import get_owned_property
 from app.schemas.documents import DocumentCreate, DocumentResponse, DocumentUpdate
-from app.services.ai_client import AIClientError, ai_client
+from app.services.document_service import DocumentService
 from app.services.analytics import track
-from app.services.document_generator import generate_document
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/generated-documents",  tags=["documents"])
-
-
-#  Background task 
-
-async def _run_generation(doc_id: uuid.UUID) -> None:
-    """
-    Runs after POST /generated-documents response is sent.
-
-    Loads the claims breakdown, lease context, and property info,
-    then calls the generator and writes the ai_draft back to the row.
-
-    Status transitions:
-      processing → draft    (generation succeeded)
-      processing → failed   (AIClientError)
-    """
-    async with SessionLocal() as db:
-        result = await db.execute(
-            select(GeneratedDocument).where(GeneratedDocument.id == doc_id)
-        )
-        doc = result.scalar_one_or_none()
-        if doc is None:
-            logger.error("_run_generation: document %s not found", doc_id)
-            return
-
-        try:
-            # Load property for label and deposit amount
-            prop_result = await db.execute(
-                select(Property).where(Property.id == doc.property_id)
-            )
-            prop = prop_result.scalar_one_or_none()
-
-            # Load lease fields (most recent with extracted data)
-            lease_result = await db.execute(
-                select(Lease)
-                .where(
-                    Lease.property_id == doc.property_id,
-                    Lease.extracted_fields.isnot(None),
-                )
-                .order_by(Lease.created_at.desc())
-                .limit(1)
-            )
-            lease = lease_result.scalar_one_or_none()
-
-            # Load all claims for this notice with their effective labels
-            claims_result = await db.execute(
-                select(Claim).where(Claim.deduction_notice_id == doc.deduction_notice_id)
-            )
-            claims = [
-                {
-                    "item_description": c.item_description,
-                    "claimed_amount": float(c.claimed_amount) if c.claimed_amount else None,
-                    "reasoning": c.reasoning,
-                    "evidence_refs": c.evidence_refs,
-                    # effective_label: user override takes precedence
-                    "effective_label": (c.user_override_label or c.label).value,
-                }
-                for c in claims_result.scalars().all()
-            ]
-
-            result_data = await generate_document(
-                doc_type=doc.doc_type.value,
-                claims=claims,
-                lease_fields=lease.extracted_fields if lease else None,
-                deposit_amount=float(prop.deposit_amount) if prop else None,
-                property_label=prop.label if prop else "your property",
-                ai_client=ai_client,
-            )
-
-            doc.ai_draft = result_data.get("draft", "")
-            doc.status = DocStatus.draft
-
-        except AIClientError as exc:
-            logger.error("Document generation failed for %s: %s", doc_id, exc)
-            doc.status = DocStatus.failed
-
-        db.add(doc)
-        await db.commit()
-
-        await track(
-            db,
-            "document_generated",
-            properties={
-                "document_id": str(doc_id),
-                "doc_type": doc.doc_type.value,
-                "status": doc.status.value,
-            },
-        )
 
 
 #  Routes 
@@ -121,17 +33,8 @@ async def create_document(
 ):
     """
     Generate a recovery document from a completed claims analysis.
-
-    doc_type:
-      message       — WhatsApp/email draft (~200 words, copy-paste ready)
-      formal_letter — full demand letter with lease clause references
-
-    Returns 202 immediately. Poll GET /generated-documents/{id} until
-    status leaves "processing".
-
-    Regenerating creates a new row — history is always preserved.
     """
-    await get_owned_property(db,body.property_id, current_user)
+    await get_owned_property(db, body.property_id, current_user)
 
     # Verify the notice exists and belongs to this property
     notice_result = await db.execute(
@@ -146,16 +49,13 @@ async def create_document(
             detail="Deduction notice not found for this property.",
         )
 
-    doc = GeneratedDocument(
+    doc = await DocumentService.create_document(
         property_id=body.property_id,
         deduction_notice_id=body.deduction_notice_id,
-        doc_type=body.doc_type,
+        doc_type=body.doc_type.value,
+        background_tasks=background_tasks,
+        db=db,
     )
-    db.add(doc)
-    await db.commit()
-    await db.refresh(doc)
-
-    background_tasks.add_task(_run_generation, doc.id)
 
     await track(
         db,
@@ -168,6 +68,20 @@ async def create_document(
         },
     )
     return doc
+
+
+@router.post("/{doc_id}/regenerate", response_model=DocumentResponse, status_code=status.HTTP_202_ACCEPTED)
+async def regenerate_document(
+    doc_id: uuid.UUID,
+    background_tasks: BackgroundTasks,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    Explicitly request regeneration of an existing document, archiving the old version.
+    """
+    await _get_owned_document(doc_id, current_user, db)
+    return await DocumentService.regenerate_document(doc_id, background_tasks, db)
 
 
 @router.get("/{doc_id}", response_model=DocumentResponse)
@@ -250,12 +164,16 @@ async def list_documents(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """List all generated documents for a property, newest first."""
-    await get_owned_property(db,property_id, current_user)
+    """List all active generated documents for a property, newest first."""
+    await get_owned_property(db, property_id, current_user)
 
     result = await db.execute(
         select(GeneratedDocument)
-        .where(GeneratedDocument.property_id == property_id)
+        .where(
+            GeneratedDocument.property_id == property_id,
+            GeneratedDocument.is_active == True,
+            GeneratedDocument.status.in_([DocStatus.draft, DocStatus.sent])
+        )
         .order_by(GeneratedDocument.created_at.desc())
     )
     return result.scalars().all()

@@ -23,6 +23,7 @@ async def get_owned_property(
         select(Property).where(
             Property.id == property_id,
             Property.user_id == user.id,
+            Property.deleted_at.is_(None),
         )
     )
 
@@ -78,9 +79,19 @@ async def get_property(prop: Property = Depends(owned_property)):
 
 @router.put("/{property_id}",response_model=PropertyResponse)
 async def update_property_route(
+    property_id: uuid.UUID,
     body: PropertyUpdate,
-    prop: uuid.UUID,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    return await PropertyService.update_property(db=db,property_id=prop,user=current_user,data=body)
+    return await PropertyService.update_property(db=db,property_id=property_id,user=current_user,data=body)
+
+
+@router.delete("/{property_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def delete_property_route(
+    property_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    await PropertyService.delete_property(db=db, property_id=property_id, user=current_user)
+    return

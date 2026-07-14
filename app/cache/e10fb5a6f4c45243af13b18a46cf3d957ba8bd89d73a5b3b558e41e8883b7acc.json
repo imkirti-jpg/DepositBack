@@ -1,0 +1,84 @@
+{
+  "raw_text": "{\n  \"property_address\": \"123 Maple Street, Springfield, IL 62704\",\n  \"tenant_name\": \"Alex Johnson\",\n  \"landlord_name\": \"Maple Property Management LLC\",\n  \"lease_start_date\": \"January 1, 2026\",\n  \"lease_end_date\": \"December 31, 2026\",\n  \"monthly_rent\": \"$1,500\",\n  \"security_deposit\": \"$2,000\",\n  \"utilities\": {\n    \"tenant_pays\": [\n      \"electricity\",\n      \"internet\"\n    ],\n    \"landlord_pays\": [\n      \"water\",\n      \"trash\"\n    ]\n  },\n  \"move_out_cleaning_required\": true,\n  \"professional_cleaning_required\": false,\n  \"painting_required\": false,\n  \"tenant_responsible_for_damage\": false,\n  \"tenant_responsible_for_fixtures\": false,\n  \"late_fees\": null,\n  \"other_obligations\": [\n    \"Tenant must leave the property reasonably clean upon move-out.\"\n  ],\n  \"clauses\": [\n    {\n      \"id\": \"clause_property_address\",\n      \"title\": \"Property Address\",\n      \"text\": \"Property Address: 123 Maple Street, Springfield, IL 62704\"\n    },\n    {\n      \"id\": \"clause_landlord\",\n      \"title\": \"Landlord\",\n      \"text\": \"Landlord: Maple Property Management LLC\"\n    },\n    {\n      \"id\": \"clause_tenant\",\n      \"title\": \"Tenant\",\n      \"text\": \"Tenant: Alex Johnson\"\n    },\n    {\n      \"id\": \"clause_lease_start\",\n      \"title\": \"Lease Start\",\n      \"text\": \"Lease Start: January 1, 2026\"\n    },\n    {\n      \"id\": \"clause_lease_end\",\n      \"title\": \"Lease End\",\n      \"text\": \"Lease End: December 31, 2026\"\n    },\n    {\n      \"id\": \"clause_monthly_rent\",\n      \"title\": \"Monthly Rent\",\n      \"text\": \"Monthly Rent: $1,500 due on the 1st of each month.\"\n    },\n    {\n      \"id\": \"clause_security_deposit\",\n      \"title\": \"Security Deposit\",\n      \"text\": \"Security Deposit: $2,000\"\n    },\n    {\n      \"id\": \"clause_utilities\",\n      \"title\": \"Utilities\",\n      \"text\": \"Utilities: Tenant pays electricity and internet. Landlord pays water and trash.\"\n    },\n    {\n      \"id\": \"clause_move_in_condition\",\n      \"title\": \"Move-in Condition\",\n      \"text\": \"Move-in Condition: Property delivered clean with no significant damage.\"\n    },\n    {\n      \"id\": \"clause_cleaning_requirement\",\n      \"title\": \"Cleaning Requirement\",\n      \"text\": \"Cleaning Requirement: Tenant must leave the property reasonably clean upon move-out.\"\n    }\n  ]\n}",
+  "parsed": {
+    "property_address": "123 Maple Street, Springfield, IL 62704",
+    "tenant_name": "Alex Johnson",
+    "landlord_name": "Maple Property Management LLC",
+    "lease_start_date": "January 1, 2026",
+    "lease_end_date": "December 31, 2026",
+    "monthly_rent": "$1,500",
+    "security_deposit": "$2,000",
+    "utilities": {
+      "tenant_pays": [
+        "electricity",
+        "internet"
+      ],
+      "landlord_pays": [
+        "water",
+        "trash"
+      ]
+    },
+    "move_out_cleaning_required": true,
+    "professional_cleaning_required": false,
+    "painting_required": false,
+    "tenant_responsible_for_damage": false,
+    "tenant_responsible_for_fixtures": false,
+    "late_fees": null,
+    "other_obligations": [
+      "Tenant must leave the property reasonably clean upon move-out."
+    ],
+    "clauses": [
+      {
+        "id": "clause_property_address",
+        "title": "Property Address",
+        "text": "Property Address: 123 Maple Street, Springfield, IL 62704"
+      },
+      {
+        "id": "clause_landlord",
+        "title": "Landlord",
+        "text": "Landlord: Maple Property Management LLC"
+      },
+      {
+        "id": "clause_tenant",
+        "title": "Tenant",
+        "text": "Tenant: Alex Johnson"
+      },
+      {
+        "id": "clause_lease_start",
+        "title": "Lease Start",
+        "text": "Lease Start: January 1, 2026"
+      },
+      {
+        "id": "clause_lease_end",
+        "title": "Lease End",
+        "text": "Lease End: December 31, 2026"
+      },
+      {
+        "id": "clause_monthly_rent",
+        "title": "Monthly Rent",
+        "text": "Monthly Rent: $1,500 due on the 1st of each month."
+      },
+      {
+        "id": "clause_security_deposit",
+        "title": "Security Deposit",
+        "text": "Security Deposit: $2,000"
+      },
+      {
+        "id": "clause_utilities",
+        "title": "Utilities",
+        "text": "Utilities: Tenant pays electricity and internet. Landlord pays water and trash."
+      },
+      {
+        "id": "clause_move_in_condition",
+        "title": "Move-in Condition",
+        "text": "Move-in Condition: Property delivered clean with no significant damage."
+      },
+      {
+        "id": "clause_cleaning_requirement",
+        "title": "Cleaning Requirement",
+        "text": "Cleaning Requirement: Tenant must leave the property reasonably clean upon move-out."
+      }
+    ]
+  },
+  "retried": false
+}

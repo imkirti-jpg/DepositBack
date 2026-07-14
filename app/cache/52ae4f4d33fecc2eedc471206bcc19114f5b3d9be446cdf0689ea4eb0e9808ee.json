@@ -1,0 +1,65 @@
+{
+  "raw_text": "{\n  \"summary\": {\n    \"supported_amount\": 0,\n    \"unsupported_amount\": 600,\n    \"unclear_amount\": 400\n  },\n  \"claims\": [\n    {\n      \"title\": \"Carpet cleaning\",\n      \"amount\": 250,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.2,\n      \"reasoning\": \"The lease permits deductions for 'Excessive cleaning costs' (clause_permitted_deductions) but not for 'Ordinary carpet wear' (clause_not_permitted_as_deductions). The tenant is obligated to 'leave premises broom-clean' (clause_move_out). However, there is no evidence provided to demonstrate the condition of the carpet at move-in or move-out, nor is there an invoice to substantiate the cost of the cleaning service. Without evidence of the carpet's condition or the necessity for excessive cleaning, the claim cannot be assessed.\",\n      \"needed_evidence\": [\n        \"Move-in inspection report or photos detailing carpet condition.\",\n        \"Move-out inspection report or photos detailing carpet condition.\",\n        \"Invoice for carpet cleaning service.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_permitted_deductions\",\n        \"clause_not_permitted_as_deductions\",\n        \"clause_move_out\"\n      ],\n      \"evidence_ids\": []\n    },\n    {\n      \"title\": \"Wall repainting\",\n      \"amount\": 600,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 0.8,\n      \"reasoning\": \"The lease explicitly states, 'No repainting charge for normal fading. Charges apply only for intentional damage or unauthorized painting' (clause_painting). While 'Damage beyond normal wear and tear' is a permitted deduction (clause_permitted_deductions), 'Minor paint fading' is not (clause_not_permitted_as_deductions). No evidence has been provided to show intentional damage, unauthorized painting, or damage beyond normal wear and tear. The provided move-in evidence (E1, E2) contains no notes regarding wall condition. Without evidence demonstrating a breach of the lease terms regarding painting, this deduction is unsupported.\",\n      \"needed_evidence\": [\n        \"Move-in inspection report or photos detailing wall condition.\",\n        \"Move-out inspection report or photos detailing wall condition, specifically showing intentional damage or unauthorized painting.\",\n        \"Invoice for repainting service.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_painting\",\n        \"clause_permitted_deductions\",\n        \"clause_not_permitted_as_deductions\"\n      ],\n      \"evidence_ids\": []\n    },\n    {\n      \"title\": \"Trash removal\",\n      \"amount\": 150,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.2,\n      \"reasoning\": \"The lease requires the tenant to 'remove belongings' and 'leave premises broom-clean' at move-out (clause_move_out). While 'Excessive cleaning costs' are a permitted deduction (clause_permitted_deductions), there is no evidence provided to show that the tenant failed to remove belongings or left trash requiring removal. The provided move-in evidence (E1, E2) contains no notes. An invoice for the trash removal service is also missing. Without evidence of the premises' condition at move-out or the cost incurred, the claim cannot be assessed.\",\n      \"needed_evidence\": [\n        \"Move-out inspection report or photos showing trash left behind.\",\n        \"Invoice for trash removal service.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_move_out\",\n        \"clause_permitted_deductions\"\n      ],\n      \"evidence_ids\": []\n    }\n  ]\n}",
+  "parsed": {
+    "summary": {
+      "supported_amount": 0,
+      "unsupported_amount": 600,
+      "unclear_amount": 400
+    },
+    "claims": [
+      {
+        "title": "Carpet cleaning",
+        "amount": 250,
+        "verdict": "unclear",
+        "confidence": 0.2,
+        "reasoning": "The lease permits deductions for 'Excessive cleaning costs' (clause_permitted_deductions) but not for 'Ordinary carpet wear' (clause_not_permitted_as_deductions). The tenant is obligated to 'leave premises broom-clean' (clause_move_out). However, there is no evidence provided to demonstrate the condition of the carpet at move-in or move-out, nor is there an invoice to substantiate the cost of the cleaning service. Without evidence of the carpet's condition or the necessity for excessive cleaning, the claim cannot be assessed.",
+        "needed_evidence": [
+          "Move-in inspection report or photos detailing carpet condition.",
+          "Move-out inspection report or photos detailing carpet condition.",
+          "Invoice for carpet cleaning service."
+        ],
+        "lease_clause_ids": [
+          "clause_permitted_deductions",
+          "clause_not_permitted_as_deductions",
+          "clause_move_out"
+        ],
+        "evidence_ids": []
+      },
+      {
+        "title": "Wall repainting",
+        "amount": 600,
+        "verdict": "unsupported",
+        "confidence": 0.8,
+        "reasoning": "The lease explicitly states, 'No repainting charge for normal fading. Charges apply only for intentional damage or unauthorized painting' (clause_painting). While 'Damage beyond normal wear and tear' is a permitted deduction (clause_permitted_deductions), 'Minor paint fading' is not (clause_not_permitted_as_deductions). No evidence has been provided to show intentional damage, unauthorized painting, or damage beyond normal wear and tear. The provided move-in evidence (E1, E2) contains no notes regarding wall condition. Without evidence demonstrating a breach of the lease terms regarding painting, this deduction is unsupported.",
+        "needed_evidence": [
+          "Move-in inspection report or photos detailing wall condition.",
+          "Move-out inspection report or photos detailing wall condition, specifically showing intentional damage or unauthorized painting.",
+          "Invoice for repainting service."
+        ],
+        "lease_clause_ids": [
+          "clause_painting",
+          "clause_permitted_deductions",
+          "clause_not_permitted_as_deductions"
+        ],
+        "evidence_ids": []
+      },
+      {
+        "title": "Trash removal",
+        "amount": 150,
+        "verdict": "unclear",
+        "confidence": 0.2,
+        "reasoning": "The lease requires the tenant to 'remove belongings' and 'leave premises broom-clean' at move-out (clause_move_out). While 'Excessive cleaning costs' are a permitted deduction (clause_permitted_deductions), there is no evidence provided to show that the tenant failed to remove belongings or left trash requiring removal. The provided move-in evidence (E1, E2) contains no notes. An invoice for the trash removal service is also missing. Without evidence of the premises' condition at move-out or the cost incurred, the claim cannot be assessed.",
+        "needed_evidence": [
+          "Move-out inspection report or photos showing trash left behind.",
+          "Invoice for trash removal service."
+        ],
+        "lease_clause_ids": [
+          "clause_move_out",
+          "clause_permitted_deductions"
+        ],
+        "evidence_ids": []
+      }
+    ]
+  },
+  "retried": false
+}

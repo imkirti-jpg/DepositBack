@@ -1,0 +1,38 @@
+{
+  "raw_text": "{\n  \"claims\": [\n    {\n      \"item_description\": \"Repainting of all walls\",\n      \"claimed_amount\": 8000,\n      \"currency\": \"INR\"\n    },\n    {\n      \"item_description\": \"Deep cleaning of apartment\",\n      \"claimed_amount\": 2000,\n      \"currency\": \"INR\"\n    },\n    {\n      \"item_description\": \"Replacement of broken window latch\",\n      \"claimed_amount\": 500,\n      \"currency\": \"INR\"\n    },\n    {\n      \"item_description\": \"Repair of damaged bedroom wall caused by wall-mounted TV\",\n      \"claimed_amount\": 3500,\n      \"currency\": \"INR\"\n    },\n    {\n      \"item_description\": \"Replacement of missing access card\",\n      \"claimed_amount\": 1000,\n      \"currency\": \"INR\"\n    },\n    {\n      \"item_description\": \"Outstanding electricity bill\",\n      \"claimed_amount\": 1850,\n      \"currency\": \"INR\"\n    }\n  ]\n}",
+  "parsed": {
+    "claims": [
+      {
+        "item_description": "Repainting of all walls",
+        "claimed_amount": 8000,
+        "currency": "INR"
+      },
+      {
+        "item_description": "Deep cleaning of apartment",
+        "claimed_amount": 2000,
+        "currency": "INR"
+      },
+      {
+        "item_description": "Replacement of broken window latch",
+        "claimed_amount": 500,
+        "currency": "INR"
+      },
+      {
+        "item_description": "Repair of damaged bedroom wall caused by wall-mounted TV",
+        "claimed_amount": 3500,
+        "currency": "INR"
+      },
+      {
+        "item_description": "Replacement of missing access card",
+        "claimed_amount": 1000,
+        "currency": "INR"
+      },
+      {
+        "item_description": "Outstanding electricity bill",
+        "claimed_amount": 1850,
+        "currency": "INR"
+      }
+    ]
+  },
+  "retried": false
+}

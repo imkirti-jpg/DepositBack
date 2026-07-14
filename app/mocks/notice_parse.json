@@ -1,0 +1,19 @@
+{
+  "claims": [
+    {
+      "item_description": "Carpet cleaning",
+      "claimed_amount": 250.00,
+      "currency": "INR"
+    },
+    {
+      "item_description": "Wall repainting",
+      "claimed_amount": 600.00,
+      "currency": "INR"
+    },
+    {
+      "item_description": "Trash removal",
+      "claimed_amount": 150.00,
+      "currency": "INR"
+    }
+  ]
+}

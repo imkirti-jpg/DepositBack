@@ -1,0 +1,70 @@
+{
+  "raw_text": "{\n  \"property_address\": \"Flat No. 302, Green Residency, Sector 62, Noida, Uttar Pradesh.\",\n  \"tenant_name\": \"Priya Verma\",\n  \"landlord_name\": \"Rajesh Sharma\",\n  \"lease_start_date\": \"1 April 2025\",\n  \"lease_end_date\": \"31 March 2026\",\n  \"monthly_rent\": \"Rs. 25,000\",\n  \"security_deposit\": \"Rs. 50,000\",\n  \"utilities\": {\n    \"tenant_pays\": [\n      \"Utility bills up to move-out\"\n    ],\n    \"landlord_pays\": []\n  },\n  \"move_out_cleaning_required\": true,\n  \"professional_cleaning_required\": false,\n  \"painting_required\": false,\n  \"tenant_responsible_for_damage\": true,\n  \"tenant_responsible_for_fixtures\": false,\n  \"late_fees\": null,\n  \"other_obligations\": [\n    \"Tenant shall return all keys before final inspection.\"\n  ],\n  \"clauses\": [\n    {\n      \"id\": \"clause_1\",\n      \"title\": \"Security deposit refund\",\n      \"text\": \"Security deposit shall be refunded within 30 days after vacating, subject only to legitimate deductions supported by evidence.\"\n    },\n    {\n      \"id\": \"clause_2\",\n      \"title\": \"Normal wear and tear\",\n      \"text\": \"Normal wear and tear, including minor paint fading, small nail holes, and ordinary flooring wear, shall not be charged to the tenant.\"\n    },\n    {\n      \"id\": \"clause_3\",\n      \"title\": \"Deductions for actual damage\",\n      \"text\": \"Landlord may deduct amounts only for actual damage beyond normal wear and tear.\"\n    },\n    {\n      \"id\": \"clause_4\",\n      \"title\": \"Evidence for deductions\",\n      \"text\": \"Every deduction must be supported by invoices, repair receipts, photographs, or quotations.\"\n    },\n    {\n      \"id\": \"clause_5\",\n      \"title\": \"Cleaning charges\",\n      \"text\": \"Cleaning charges may be deducted only if the premises are left in an unusually unhygienic condition.\"\n    },\n    {\n      \"id\": \"clause_6\",\n      \"title\": \"Key return\",\n      \"text\": \"Tenant shall return all keys before final inspection.\"\n    },\n    {\n      \"id\": \"clause_7\",\n      \"title\": \"Utility bills responsibility\",\n      \"text\": \"Utility bills up to move-out remain the tenant's responsibility.\"\n    },\n    {\n      \"id\": \"clause_8\",\n      \"title\": \"Jurisdiction\",\n      \"text\": \"Jurisdiction: Noida, Uttar Pradesh.\"\n    }\n  ]\n}",
+  "parsed": {
+    "property_address": "Flat No. 302, Green Residency, Sector 62, Noida, Uttar Pradesh.",
+    "tenant_name": "Priya Verma",
+    "landlord_name": "Rajesh Sharma",
+    "lease_start_date": "1 April 2025",
+    "lease_end_date": "31 March 2026",
+    "monthly_rent": "Rs. 25,000",
+    "security_deposit": "Rs. 50,000",
+    "utilities": {
+      "tenant_pays": [
+        "Utility bills up to move-out"
+      ],
+      "landlord_pays": []
+    },
+    "move_out_cleaning_required": true,
+    "professional_cleaning_required": false,
+    "painting_required": false,
+    "tenant_responsible_for_damage": true,
+    "tenant_responsible_for_fixtures": false,
+    "late_fees": null,
+    "other_obligations": [
+      "Tenant shall return all keys before final inspection."
+    ],
+    "clauses": [
+      {
+        "id": "clause_1",
+        "title": "Security deposit refund",
+        "text": "Security deposit shall be refunded within 30 days after vacating, subject only to legitimate deductions supported by evidence."
+      },
+      {
+        "id": "clause_2",
+        "title": "Normal wear and tear",
+        "text": "Normal wear and tear, including minor paint fading, small nail holes, and ordinary flooring wear, shall not be charged to the tenant."
+      },
+      {
+        "id": "clause_3",
+        "title": "Deductions for actual damage",
+        "text": "Landlord may deduct amounts only for actual damage beyond normal wear and tear."
+      },
+      {
+        "id": "clause_4",
+        "title": "Evidence for deductions",
+        "text": "Every deduction must be supported by invoices, repair receipts, photographs, or quotations."
+      },
+      {
+        "id": "clause_5",
+        "title": "Cleaning charges",
+        "text": "Cleaning charges may be deducted only if the premises are left in an unusually unhygienic condition."
+      },
+      {
+        "id": "clause_6",
+        "title": "Key return",
+        "text": "Tenant shall return all keys before final inspection."
+      },
+      {
+        "id": "clause_7",
+        "title": "Utility bills responsibility",
+        "text": "Utility bills up to move-out remain the tenant's responsibility."
+      },
+      {
+        "id": "clause_8",
+        "title": "Jurisdiction",
+        "text": "Jurisdiction: Noida, Uttar Pradesh."
+      }
+    ]
+  },
+  "retried": false
+}

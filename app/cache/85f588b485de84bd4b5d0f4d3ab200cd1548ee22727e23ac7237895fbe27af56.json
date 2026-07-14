@@ -1,0 +1,33 @@
+{
+  "raw_text": "{\n  \"claims\": [\n    {\n      \"item_description\": \"Wall repainting (entire flat)\",\n      \"claimed_amount\": 18000,\n      \"currency\": \"Rs.\"\n    },\n    {\n      \"item_description\": \"Deep cleaning\",\n      \"claimed_amount\": 6500,\n      \"currency\": \"Rs.\"\n    },\n    {\n      \"item_description\": \"Broken bedroom wardrobe hinge\",\n      \"claimed_amount\": 1800,\n      \"currency\": \"Rs.\"\n    },\n    {\n      \"item_description\": \"Two missing keys\",\n      \"claimed_amount\": 1000,\n      \"currency\": \"Rs.\"\n    },\n    {\n      \"item_description\": \"Floor polishing\",\n      \"claimed_amount\": 12000,\n      \"currency\": \"Rs.\"\n    }\n  ]\n}",
+  "parsed": {
+    "claims": [
+      {
+        "item_description": "Wall repainting (entire flat)",
+        "claimed_amount": 18000,
+        "currency": "Rs."
+      },
+      {
+        "item_description": "Deep cleaning",
+        "claimed_amount": 6500,
+        "currency": "Rs."
+      },
+      {
+        "item_description": "Broken bedroom wardrobe hinge",
+        "claimed_amount": 1800,
+        "currency": "Rs."
+      },
+      {
+        "item_description": "Two missing keys",
+        "claimed_amount": 1000,
+        "currency": "Rs."
+      },
+      {
+        "item_description": "Floor polishing",
+        "claimed_amount": 12000,
+        "currency": "Rs."
+      }
+    ]
+  },
+  "retried": false
+}

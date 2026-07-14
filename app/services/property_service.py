@@ -29,6 +29,7 @@ class PropertyService:
             select(Property).where(
                 Property.id == property_id,
                 Property.user_id == user.id,
+                Property.deleted_at.is_(None),
             )
         )
 
@@ -90,7 +91,10 @@ class PropertyService:
 
         result = await db.execute(
             select(Property)
-            .where(Property.user_id == user.id)
+            .where(
+                Property.user_id == user.id,
+                Property.deleted_at.is_(None),
+            )
             .order_by(Property.created_at.desc())
         )
 
@@ -140,3 +144,28 @@ class PropertyService:
         )
 
         return property_obj
+
+    @staticmethod
+    async def delete_property(
+        db: AsyncSession,
+        property_id: uuid.UUID,
+        user: User,
+    ) -> None:
+        from datetime import datetime, timezone
+        property_obj = await PropertyService.get_owned_property(
+            db=db,
+            property_id=property_id,
+            user=user,
+        )
+        
+        property_obj.deleted_at = datetime.now(timezone.utc)
+        property_obj.deleted_by = user.id
+        
+        db.add(property_obj)
+        await db.commit()
+        
+        logger.info(
+            "Property %s soft deleted by %s",
+            property_obj.id,
+            user.id,
+        )

@@ -117,6 +117,7 @@ async def generate_document(
     deposit_amount: float | None,
     property_label: str,
     ai_client: AIClient,
+    doc_id: str | None = None,
 ) -> dict:
     """
     Generate a recovery document from the claims breakdown.
@@ -141,6 +142,7 @@ async def generate_document(
             response_schema=_DOC_SCHEMA,
             system_prompt_extra=system_extra,
             temperature=0.4,   # slightly higher than extraction  documents need natural language
+            document_id=str(doc_id) if doc_id else None,
         )
     )
 

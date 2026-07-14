@@ -1,0 +1,108 @@
+{
+  "raw_text": "{\n  \"summary\": {\n    \"supported_amount\": 0,\n    \"unsupported_amount\": 12000,\n    \"unclear_amount\": 1800\n  },\n  \"claims\": [\n    {\n      \"title\": \"Wall repainting (entire flat)\",\n      \"amount\": 18000,\n      \"verdict\": \"weak\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease states that normal wear and tear, including minor paint fading, shall not be charged to the tenant (clause_2). While full flat repainting after a one-year tenancy might not be considered normal wear and tear if there is actual damage, the landlord has not provided evidence of damage beyond normal wear and tear, nor an invoice or quotation for the repainting work as required by clause_4.\",\n      \"needed_evidence\": [\n        \"Move-out photos showing specific wall damage (e.g., large stains, holes beyond minor nail holes) beyond normal wear and tear\",\n        \"Move-in photos of the walls for comparison\",\n        \"Invoice or quotation for the repainting work\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_2\",\n        \"clause_3\",\n        \"clause_4\"\n      ],\n      \"evidence_ids\": [\n        \"E1\"\n      ]\n    },\n    {\n      \"title\": \"Deep cleaning\",\n      \"amount\": 6500,\n      \"verdict\": \"weak\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease permits cleaning charges only if the premises are left in an 'unusually unhygienic condition' (clause_5). The landlord has not provided any evidence (e.g., move-out photos) to demonstrate such a condition, nor an invoice or quotation for the deep cleaning service as required by clause_4.\",\n      \"needed_evidence\": [\n        \"Move-out photos showing the unusually unhygienic condition\",\n        \"Invoice or quotation for the deep cleaning service\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_4\",\n        \"clause_5\"\n      ],\n      \"evidence_ids\": [\n        \"E1\"\n      ]\n    },\n    {\n      \"title\": \"Broken bedroom wardrobe hinge\",\n      \"amount\": 1800,\n      \"verdict\": \"unclear\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease allows deductions for actual damage beyond normal wear and tear (clause_3). A broken hinge could be considered damage. However, the landlord has not provided any evidence (e.g., move-out photos) of the broken hinge, nor an invoice or quotation for its repair or replacement as required by clause_4. There is also no move-in evidence to confirm the hinge was in good condition at the start of the tenancy.\",\n      \"needed_evidence\": [\n        \"Move-out photos showing the broken hinge\",\n        \"Move-in photos of the wardrobe hinge for comparison\",\n        \"Invoice or quotation for the repair or replacement\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_3\",\n        \"clause_4\"\n      ],\n      \"evidence_ids\": [\n        \"E1\"\n      ]\n    },\n    {\n      \"title\": \"Two missing keys\",\n      \"amount\": 1000,\n      \"verdict\": \"weak\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease explicitly states that the tenant shall return all keys before final inspection (clause_6). While a deduction for missing keys could be valid, the landlord has not provided any evidence (e.g., move-out inventory report) confirming that two keys were indeed missing, nor an invoice or quotation for the cost of replacement or rekeying as required by clause_4.\",\n      \"needed_evidence\": [\n        \"Move-out inventory report confirming the missing keys\",\n        \"Invoice or quotation for key replacement or rekeying\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_4\",\n        \"clause_6\"\n      ],\n      \"evidence_ids\": [\n        \"E1\"\n      ]\n    },\n    {\n      \"title\": \"Floor polishing\",\n      \"amount\": 12000,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease explicitly states that 'ordinary flooring wear' shall not be charged to the tenant (clause_2). Floor polishing is typically performed to address ordinary wear and tear. The landlord has not provided any evidence (e.g., move-out photos) demonstrating damage to the floor beyond ordinary wear and tear, nor an invoice or quotation for the polishing work as required by clause_4.\",\n      \"needed_evidence\": [\n        \"Move-out photos showing specific floor damage (e.g., deep scratches, significant stains) beyond ordinary wear and tear\",\n        \"Move-in photos of the floor for comparison\",\n        \"Invoice or quotation for the floor polishing\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_2\",\n        \"clause_3\",\n        \"clause_4\"\n      ],\n      \"evidence_ids\": [\n        \"E1\"\n      ]\n    }\n  ]\n}",
+  "parsed": {
+    "summary": {
+      "supported_amount": 0,
+      "unsupported_amount": 12000,
+      "unclear_amount": 1800
+    },
+    "claims": [
+      {
+        "title": "Wall repainting (entire flat)",
+        "amount": 18000,
+        "verdict": "weak",
+        "confidence": 1.0,
+        "reasoning": "The lease states that normal wear and tear, including minor paint fading, shall not be charged to the tenant (clause_2). While full flat repainting after a one-year tenancy might not be considered normal wear and tear if there is actual damage, the landlord has not provided evidence of damage beyond normal wear and tear, nor an invoice or quotation for the repainting work as required by clause_4.",
+        "needed_evidence": [
+          "Move-out photos showing specific wall damage (e.g., large stains, holes beyond minor nail holes) beyond normal wear and tear",
+          "Move-in photos of the walls for comparison",
+          "Invoice or quotation for the repainting work"
+        ],
+        "lease_clause_ids": [
+          "clause_2",
+          "clause_3",
+          "clause_4"
+        ],
+        "evidence_ids": [
+          "E1"
+        ]
+      },
+      {
+        "title": "Deep cleaning",
+        "amount": 6500,
+        "verdict": "weak",
+        "confidence": 1.0,
+        "reasoning": "The lease permits cleaning charges only if the premises are left in an 'unusually unhygienic condition' (clause_5). The landlord has not provided any evidence (e.g., move-out photos) to demonstrate such a condition, nor an invoice or quotation for the deep cleaning service as required by clause_4.",
+        "needed_evidence": [
+          "Move-out photos showing the unusually unhygienic condition",
+          "Invoice or quotation for the deep cleaning service"
+        ],
+        "lease_clause_ids": [
+          "clause_4",
+          "clause_5"
+        ],
+        "evidence_ids": [
+          "E1"
+        ]
+      },
+      {
+        "title": "Broken bedroom wardrobe hinge",
+        "amount": 1800,
+        "verdict": "unclear",
+        "confidence": 1.0,
+        "reasoning": "The lease allows deductions for actual damage beyond normal wear and tear (clause_3). A broken hinge could be considered damage. However, the landlord has not provided any evidence (e.g., move-out photos) of the broken hinge, nor an invoice or quotation for its repair or replacement as required by clause_4. There is also no move-in evidence to confirm the hinge was in good condition at the start of the tenancy.",
+        "needed_evidence": [
+          "Move-out photos showing the broken hinge",
+          "Move-in photos of the wardrobe hinge for comparison",
+          "Invoice or quotation for the repair or replacement"
+        ],
+        "lease_clause_ids": [
+          "clause_3",
+          "clause_4"
+        ],
+        "evidence_ids": [
+          "E1"
+        ]
+      },
+      {
+        "title": "Two missing keys",
+        "amount": 1000,
+        "verdict": "weak",
+        "confidence": 1.0,
+        "reasoning": "The lease explicitly states that the tenant shall return all keys before final inspection (clause_6). While a deduction for missing keys could be valid, the landlord has not provided any evidence (e.g., move-out inventory report) confirming that two keys were indeed missing, nor an invoice or quotation for the cost of replacement or rekeying as required by clause_4.",
+        "needed_evidence": [
+          "Move-out inventory report confirming the missing keys",
+          "Invoice or quotation for key replacement or rekeying"
+        ],
+        "lease_clause_ids": [
+          "clause_4",
+          "clause_6"
+        ],
+        "evidence_ids": [
+          "E1"
+        ]
+      },
+      {
+        "title": "Floor polishing",
+        "amount": 12000,
+        "verdict": "unsupported",
+        "confidence": 1.0,
+        "reasoning": "The lease explicitly states that 'ordinary flooring wear' shall not be charged to the tenant (clause_2). Floor polishing is typically performed to address ordinary wear and tear. The landlord has not provided any evidence (e.g., move-out photos) demonstrating damage to the floor beyond ordinary wear and tear, nor an invoice or quotation for the polishing work as required by clause_4.",
+        "needed_evidence": [
+          "Move-out photos showing specific floor damage (e.g., deep scratches, significant stains) beyond ordinary wear and tear",
+          "Move-in photos of the floor for comparison",
+          "Invoice or quotation for the floor polishing"
+        ],
+        "lease_clause_ids": [
+          "clause_2",
+          "clause_3",
+          "clause_4"
+        ],
+        "evidence_ids": [
+          "E1"
+        ]
+      }
+    ]
+  },
+  "retried": false
+}

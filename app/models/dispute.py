@@ -29,6 +29,7 @@ class DeductionNotice(Base):
     )
     file_url: Mapped[str | None] = mapped_column(String(500), nullable=True)
     raw_text: Mapped[str | None] = mapped_column(Text, nullable=True)
+    notice_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     status: Mapped[NoticeStatus] = mapped_column(
         Enum(NoticeStatus, name="notice_status"),
         nullable=False,
@@ -58,6 +59,7 @@ class Claim(Base):
     user_override_label: Mapped[ClaimLabel | None] = mapped_column(
         Enum(ClaimLabel, name="claim_label"), nullable=True
     )
+    is_active: Mapped[bool] = mapped_column(nullable=False, default=True, server_default="true", index=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, default=lambda: datetime.now(timezone.utc)
     )

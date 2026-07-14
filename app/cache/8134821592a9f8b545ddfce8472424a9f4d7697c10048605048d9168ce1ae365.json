@@ -1,0 +1,103 @@
+{
+  "raw_text": "{\n  \"summary\": {\n    \"supported_amount\": 0,\n    \"unsupported_amount\": 9000,\n    \"unclear_amount\": 4000\n  },\n  \"claims\": [\n    {\n      \"title\": \"Repainting of all walls\",\n      \"amount\": 8000,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease does not contain any clause requiring the tenant to repaint the property upon move-out. There is no evidence provided to demonstrate damage to the walls beyond normal wear and tear that would necessitate repainting.\",\n      \"needed_evidence\": [\n        \"Move-in and move-out inspection reports or photos specifically showing wall damage beyond normal wear and tear.\"\n      ],\n      \"lease_clause_ids\": [],\n      \"evidence_ids\": [\n        \"8b5409de-c512-4336-bb3a-dedf0247d7c0\",\n        \"42688272-c0f2-41f5-80f1-9b9abe9e3c02\"\n      ]\n    },\n    {\n      \"title\": \"Deep cleaning of apartment\",\n      \"amount\": 2000,\n      \"verdict\": \"weak\",\n      \"confidence\": 0.7,\n      \"reasoning\": \"The lease states, 'Tenant must leave the property reasonably clean upon move-out.' It does not require a 'deep clean' or professional cleaning. The provided move-out evidence does not specifically detail areas that were not reasonably clean.\",\n      \"needed_evidence\": [\n        \"Detailed move-out inspection report or photos showing specific areas that were not reasonably clean.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_cleaning_requirement\"\n      ],\n      \"evidence_ids\": [\n        \"42688272-c0f2-41f5-80f1-9b9abe9e3c02\"\n      ]\n    },\n    {\n      \"title\": \"Replacement of broken window latch\",\n      \"amount\": 500,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.6,\n      \"reasoning\": \"The lease does not contain a clause explicitly assigning responsibility to the tenant for the repair or replacement of fixtures such as a window latch. There is no move-in or move-out evidence specifically showing the condition of the window latch.\",\n      \"needed_evidence\": [\n        \"Move-in and move-out inspection reports or photos specifically showing the condition of the window latch.\",\n        \"A lease clause assigning responsibility for such repairs to the tenant.\"\n      ],\n      \"lease_clause_ids\": [],\n      \"evidence_ids\": [\n        \"8b5409de-c512-4336-bb3a-dedf0247d7c0\",\n        \"42688272-c0f2-41f5-80f1-9b9abe9e3c02\"\n      ]\n    },\n    {\n      \"title\": \"Repair of damaged bedroom wall caused by wall-mounted TV\",\n      \"amount\": 3500,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.6,\n      \"reasoning\": \"The lease does not contain a clause explicitly assigning responsibility to the tenant for damage caused by installations or modifications. There is no move-in or move-out evidence specifically showing the condition of the bedroom wall or the alleged damage.\",\n      \"needed_evidence\": [\n        \"Move-in and move-out inspection reports or photos specifically showing the condition of the bedroom wall.\",\n        \"A lease clause assigning responsibility for tenant-caused damage or modifications to the tenant.\"\n      ],\n      \"lease_clause_ids\": [],\n      \"evidence_ids\": [\n        \"8b5409de-c512-4336-bb3a-dedf0247d7c0\",\n        \"42688272-c0f2-41f5-80f1-9b9abe9e3c02\"\n      ]\n    },\n    {\n      \"title\": \"Replacement of missing access card\",\n      \"amount\": 1000,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 1.0,\n      \"reasoning\": \"The lease does not contain any clause regarding access cards, their provision, or fees for their replacement if missing. No evidence has been provided to confirm an access card was issued to the tenant or that it is currently missing.\",\n      \"needed_evidence\": [\n        \"A lease clause or addendum stating tenant responsibility for access cards and replacement fees.\",\n        \"Evidence that an access card was issued to the tenant and not returned.\"\n      ],\n      \"lease_clause_ids\": [],\n      \"evidence_ids\": []\n    },\n    {\n      \"title\": \"Outstanding electricity bill\",\n      \"amount\": 1850,\n      \"verdict\": \"weak\",\n      \"confidence\": 0.8,\n      \"reasoning\": \"The lease clearly states, 'Tenant pays electricity and internet.' This clause establishes tenant responsibility for electricity bills. However, no evidence of an outstanding electricity bill (e.g., a copy of the bill) has been provided to substantiate the claimed amount.\",\n      \"needed_evidence\": [\n        \"A copy of the outstanding electricity bill showing the amount and billing period.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_utilities\"\n      ],\n      \"evidence_ids\": []\n    }\n  ]\n}",
+  "parsed": {
+    "summary": {
+      "supported_amount": 0,
+      "unsupported_amount": 9000,
+      "unclear_amount": 4000
+    },
+    "claims": [
+      {
+        "title": "Repainting of all walls",
+        "amount": 8000,
+        "verdict": "unsupported",
+        "confidence": 1.0,
+        "reasoning": "The lease does not contain any clause requiring the tenant to repaint the property upon move-out. There is no evidence provided to demonstrate damage to the walls beyond normal wear and tear that would necessitate repainting.",
+        "needed_evidence": [
+          "Move-in and move-out inspection reports or photos specifically showing wall damage beyond normal wear and tear."
+        ],
+        "lease_clause_ids": [],
+        "evidence_ids": [
+          "8b5409de-c512-4336-bb3a-dedf0247d7c0",
+          "42688272-c0f2-41f5-80f1-9b9abe9e3c02"
+        ]
+      },
+      {
+        "title": "Deep cleaning of apartment",
+        "amount": 2000,
+        "verdict": "weak",
+        "confidence": 0.7,
+        "reasoning": "The lease states, 'Tenant must leave the property reasonably clean upon move-out.' It does not require a 'deep clean' or professional cleaning. The provided move-out evidence does not specifically detail areas that were not reasonably clean.",
+        "needed_evidence": [
+          "Detailed move-out inspection report or photos showing specific areas that were not reasonably clean."
+        ],
+        "lease_clause_ids": [
+          "clause_cleaning_requirement"
+        ],
+        "evidence_ids": [
+          "42688272-c0f2-41f5-80f1-9b9abe9e3c02"
+        ]
+      },
+      {
+        "title": "Replacement of broken window latch",
+        "amount": 500,
+        "verdict": "unclear",
+        "confidence": 0.6,
+        "reasoning": "The lease does not contain a clause explicitly assigning responsibility to the tenant for the repair or replacement of fixtures such as a window latch. There is no move-in or move-out evidence specifically showing the condition of the window latch.",
+        "needed_evidence": [
+          "Move-in and move-out inspection reports or photos specifically showing the condition of the window latch.",
+          "A lease clause assigning responsibility for such repairs to the tenant."
+        ],
+        "lease_clause_ids": [],
+        "evidence_ids": [
+          "8b5409de-c512-4336-bb3a-dedf0247d7c0",
+          "42688272-c0f2-41f5-80f1-9b9abe9e3c02"
+        ]
+      },
+      {
+        "title": "Repair of damaged bedroom wall caused by wall-mounted TV",
+        "amount": 3500,
+        "verdict": "unclear",
+        "confidence": 0.6,
+        "reasoning": "The lease does not contain a clause explicitly assigning responsibility to the tenant for damage caused by installations or modifications. There is no move-in or move-out evidence specifically showing the condition of the bedroom wall or the alleged damage.",
+        "needed_evidence": [
+          "Move-in and move-out inspection reports or photos specifically showing the condition of the bedroom wall.",
+          "A lease clause assigning responsibility for tenant-caused damage or modifications to the tenant."
+        ],
+        "lease_clause_ids": [],
+        "evidence_ids": [
+          "8b5409de-c512-4336-bb3a-dedf0247d7c0",
+          "42688272-c0f2-41f5-80f1-9b9abe9e3c02"
+        ]
+      },
+      {
+        "title": "Replacement of missing access card",
+        "amount": 1000,
+        "verdict": "unsupported",
+        "confidence": 1.0,
+        "reasoning": "The lease does not contain any clause regarding access cards, their provision, or fees for their replacement if missing. No evidence has been provided to confirm an access card was issued to the tenant or that it is currently missing.",
+        "needed_evidence": [
+          "A lease clause or addendum stating tenant responsibility for access cards and replacement fees.",
+          "Evidence that an access card was issued to the tenant and not returned."
+        ],
+        "lease_clause_ids": [],
+        "evidence_ids": []
+      },
+      {
+        "title": "Outstanding electricity bill",
+        "amount": 1850,
+        "verdict": "weak",
+        "confidence": 0.8,
+        "reasoning": "The lease clearly states, 'Tenant pays electricity and internet.' This clause establishes tenant responsibility for electricity bills. However, no evidence of an outstanding electricity bill (e.g., a copy of the bill) has been provided to substantiate the claimed amount.",
+        "needed_evidence": [
+          "A copy of the outstanding electricity bill showing the amount and billing period."
+        ],
+        "lease_clause_ids": [
+          "clause_utilities"
+        ],
+        "evidence_ids": []
+      }
+    ]
+  },
+  "retried": false
+}

@@ -42,67 +42,78 @@ Rules:
 _ANALYZE_SCHEMA = {
     "type": "object",
     "properties": {
-        "analyzed_claims": {
+        "summary": {
+            "type": "object",
+            "properties": {
+                "supported_amount": {"type": "number"},
+                "unsupported_amount": {"type": "number"},
+                "unclear_amount": {"type": "number"},
+            },
+        },
+        "claims": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "item_description": {"type": "string"},
-                    "claimed_amount":   {"type": "number"},
-                    "label": {
+                    "title": {"type": "string"},
+                    "amount": {"type": "number"},
+                    "verdict": {
                         "type": "string",
                         "enum": ["supported", "weak", "unsupported", "unclear"],
                     },
-                    "reasoning": {"type": "string"},
-                    "evidence_refs": {
-                        "type": "object",
-                        "properties": {
-                            "lease_clauses": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            },
-                            "evidence_ids": {
-                                "type": "array",
-                                "items": {"type": "string"},
-                            },
-                        },
+                    "contract_status": {
+                        "type": "string",
+                        "enum": ["allowed", "partially_allowed", "not_allowed"],
                     },
+                    "evidence_status": {
+                        "type": "string",
+                        "enum": ["sufficient", "partial", "missing"],
+                    },
+                    "confidence": {"type": "number"},
+                    "reasoning": {"type": "string"},
+                    "landlord_evidence": {"type": "array", "items": {"type": "string"}},
+                    "needed_evidence": {"type": "array", "items": {"type": "string"}},
+                    "lease_clause_ids": {"type": "array", "items": {"type": "string"}},
+                    "evidence_ids": {"type": "array", "items": {"type": "string"}},
                 },
             },
-        }
+        },
     },
 }
 
 _ANALYZE_SYSTEM_EXTRA = """
-You are a tenancy-dispute analyst assessing whether each deduction in a
-landlord's notice is justified under the lease and the tenant's evidence.
+You are an expert tenancy-dispute analyst evaluating landlord deduction claims.
 
-Label definitions — use exactly one per claim:
-  supported    — the lease clearly permits this deduction AND the landlord's
-                 claim is consistent with the evidence.
-  weak         — the deduction may be partially valid but lacks lease backing,
-                 is likely normal wear and tear, or the amount is disproportionate.
-  unsupported  — no lease clause permits this deduction, or evidence directly
-                 contradicts the landlord's claim.
-  unclear      — insufficient information to assess; state exactly what is missing.
+For each claim line item, evaluate two distinct dimensions:
+1. CONTRACT: Is this type of deduction allowed under the lease clauses?
+   - contract_status:
+     - allowed: The lease explicitly permits this deduction type (e.g. cleaning, damage repairs).
+     - partially_allowed: The lease allows it under restricted conditions or only a portion of it.
+     - not_allowed: The lease does not support this type of deduction, or explicitly prohibits it.
 
-Use unclear ONLY when a conclusion truly cannot be reached.
+2. EVIDENCE: Is the claim supported by specific, credible evidence?
+   - evidence_status:
+     - sufficient: Landlord's referenced invoices/photos exist and tenant evidence doesn't contradict.
+     - partial: Some evidence exists, but it's incomplete or weak.
+     - missing: No invoices, photos, or proof are mentioned or provided.
 
-If the lease suggests a deduction MAY be valid but the landlord has weak or incomplete support, use weak.
+Combine these into the final "verdict":
+  - supported   — Lease allows the deduction AND evidence is sufficient.
+  - weak        — Lease allows/may allow the deduction, but evidence is insufficient or missing.
+  - unsupported — Lease does not support the deduction, or tenant evidence refutes it.
+  - unclear     — Conflicting or ambiguous information makes it impossible to decide.
 
-Do not overuse unclear.
-For each claim:
-1. Check whether the lease's extracted_fields contain a clause that permits
-   or prohibits this type of deduction.
-2. Check whether any uploaded evidence (move-in or move-out photos/notes)
-   supports or contradicts the deduction.
-3. Apply Indian tenancy norms where relevant:
+Rules:
+1. Distinguish three categories of evidence:
+   - Landlord-Referenced: List any photos, invoices, estimates, or documents mentioned/referenced by the landlord in the deduction notice in "landlord_evidence" (e.g. "cleaning invoice").
+   - Tenant-Uploaded (Actually Uploaded): Match and cite ONLY specific tenant-uploaded evidence IDs from the UPLOADED EVIDENCE section in "evidence_ids" that directly relate to this claim. DO NOT generically match files (like "Move-in Photo 1") unless the note, room, or phase explicitly correlates with the deduction.
+   - Needed Evidence: List any additional evidence that is still required to verify the claim in "needed_evidence".
+2. Apply Indian tenancy norms:
    - Normal wear and tear is the landlord's responsibility, not the tenant's.
    - Repainting after 2+ years of tenancy is typically normal wear and tear.
    - Deductions for pre-existing damage are not valid.
-4. Cite specific lease clauses and evidence IDs in evidence_refs.
-   If nothing relevant exists, leave the arrays empty and explain what is missing
-   in the reasoning field.
+3. Cite specific lease clauses in "lease_clause_ids". Never fabricate clause IDs or evidence IDs.
+4. If information is missing, state "Not found in provided documents" in reasoning.
 5. Never state or imply the tenant will win or recover a specific amount.
 """
 
@@ -117,6 +128,7 @@ async def analyze_notice(
     lease_fields: dict | None,
     evidence_rows: list[dict],
     ai_client: AIClient,
+    notice_id: str | None = None,
 ) -> list[dict]:
     """
     Run the two-pass analysis pipeline.
@@ -137,6 +149,7 @@ async def analyze_notice(
             response_schema=_PARSE_SCHEMA,
             system_prompt_extra=_PARSE_SYSTEM_EXTRA,
             temperature=0.1,
+            document_id=f"{notice_id}_parse" if notice_id else None,
         )
     )
     raw_claims = parse_response.parsed.get("claims", [])
@@ -155,15 +168,35 @@ async def analyze_notice(
             response_schema=_ANALYZE_SCHEMA,
             system_prompt_extra=_ANALYZE_SYSTEM_EXTRA,
             temperature=0.2,
+            document_id=f"{notice_id}_analyze" if notice_id else None,
         )
     )
-    analyzed = analyze_response.parsed.get("analyzed_claims", [])
+    claims_list = analyze_response.parsed.get("claims", [])
     logger.info(
         "dispute_engine pass 2: analyzed %d claims (retried=%s)",
-        len(analyzed),
+        len(claims_list),
         analyze_response.retried,
     )
-    return analyzed
+    
+    # Map back to database schema keys:
+    # item_description, claimed_amount, label, reasoning, evidence_refs
+    mapped = []
+    for cl in claims_list:
+        mapped.append({
+            "item_description": cl.get("title", ""),
+            "claimed_amount": cl.get("amount"),
+            "label": cl.get("verdict", "unclear"),
+            "reasoning": cl.get("reasoning", ""),
+            "evidence_refs": {
+                "lease_clauses": cl.get("lease_clause_ids", []),
+                "evidence_ids": cl.get("evidence_ids", []),
+                "needed_evidence": cl.get("needed_evidence", []),
+                "landlord_evidence": cl.get("landlord_evidence", []),
+                "contract_status": cl.get("contract_status", "not_allowed"),
+                "evidence_status": cl.get("evidence_status", "missing"),
+            }
+        })
+    return mapped
 
 
 def _build_notice_parts(

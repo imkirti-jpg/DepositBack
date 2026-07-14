@@ -20,6 +20,7 @@ class Lease(Base):
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     property_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), ForeignKey("properties.id"), nullable=False, index=True)
     file_url: Mapped[str] = mapped_column(String(500), nullable=False)
+    file_hash: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     extracted_fields: Mapped[dict | None] = mapped_column(JSONB, nullable=True)
     status: Mapped[LeaseStatus] = mapped_column(Enum(LeaseStatus, name="lease_status"),nullable=False,default=LeaseStatus.processing)
     created_at: Mapped[datetime] = mapped_column(

@@ -34,6 +34,10 @@ _CERTAINTY_PHRASES = [
 ]
 
 
+import os
+import hashlib
+import datetime
+
 class AIClientError(Exception):
     pass
 
@@ -45,6 +49,8 @@ class AIRequest:
     system_prompt_extra: str = ""
     temperature: float = 0.2
     max_output_tokens: int = 8192
+    allow_retry: bool = False
+    document_id: str | None = None
 
 
 @dataclass
@@ -59,13 +65,105 @@ class AIClient:
         self._client = genai.Client(api_key=settings.GEMINI_API_KEY)
         self._model = settings.GEMINI_MODEL
 
+    @staticmethod
+    def calculate_request_hash(request: AIRequest) -> str:
+        h = hashlib.sha256()
+        h.update((request.system_prompt_extra or "").encode("utf-8"))
+        h.update(json.dumps(request.response_schema, sort_keys=True).encode("utf-8"))
+        for part in request.parts:
+            if isinstance(part, str):
+                h.update(part.encode("utf-8"))
+            elif isinstance(part, dict):
+                h.update(part.get("data", b""))
+                h.update(part.get("mime_type", "").encode("utf-8"))
+        return h.hexdigest()
+
+    def _load_mock_response(self, request: AIRequest) -> dict:
+        mocks_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "mocks")
+        extra = (request.system_prompt_extra or "").lower()
+        parts_combined = " ".join([p if isinstance(p, str) else "" for p in request.parts]).lower()
+        
+        if "expert legal document parser" in extra or "extract the key tenancy fields" in parts_combined:
+            filename = "lease_extraction.json"
+        elif "parsing a landlord's deduction notice" in extra or "parse this deduction notice" in parts_combined:
+            filename = "notice_parse.json"
+        elif "tenant rights and lease analysis assistant" in extra or "evaluate every deduction separately" in extra:
+            filename = "notice_analysis.json"
+        elif "whatsapp/email draft" in extra or "demand letter" in extra or "firm, professional message" in extra:
+            filename = "document_generation.json"
+        else:
+            filename = "notice_analysis.json"
+            
+        mock_path = os.path.join(mocks_dir, filename)
+        try:
+            with open(mock_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception as e:
+            logger.error("Mock load failed for %s: %s", filename, e)
+            return {}
+
     async def call(self, request: AIRequest) -> AIResponse:
+        req_hash = self.calculate_request_hash(request)
+        doc_id = request.document_id or req_hash
+        timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        
+        # 1. Dev mode: AI disabled
+        if not settings.AI_ENABLED:
+            logger.info("[%s] [Doc ID: %s] Dev mode (AI_ENABLED=False). Loading mock response...", timestamp, doc_id)
+            mock_data = self._load_mock_response(request)
+            return AIResponse(raw_text=json.dumps(mock_data), parsed=mock_data, retried=False)
+            
+        # 2. Cache check
+        cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "cache")
+        os.makedirs(cache_dir, exist_ok=True)
+        cache_path = os.path.join(cache_dir, f"{req_hash}.json")
+        
+        if os.path.exists(cache_path):
+            logger.info("[%s] [Doc ID: %s] Cache hit. Returning cached response...", timestamp, doc_id)
+            try:
+                with open(cache_path, "r", encoding="utf-8") as f:
+                    cached_data = json.load(f)
+                return AIResponse(
+                    raw_text=cached_data.get("raw_text", ""),
+                    parsed=cached_data.get("parsed", {}),
+                    retried=cached_data.get("retried", False)
+                )
+            except Exception as e:
+                logger.error("Failed to read cache file: %s", e)
+
+        # 3. Gemini API Call
+        logger.info("[%s] [Doc ID: %s] Making Gemini API call (Hash: %s)", timestamp, doc_id, req_hash)
+        
         system_instruction = self._build_system_prompt(request.system_prompt_extra)
         user_parts = self._build_parts(request)
-        raw_text, retried = await self._call_with_retry(
-            system_instruction, user_parts, request.temperature, request.max_output_tokens
-        )
+        
+        if request.allow_retry:
+            raw_text, retried = await self._call_with_retry(
+                system_instruction, user_parts, request.temperature, request.max_output_tokens
+            )
+        else:
+            raw_text = await self._gemini_call(system_instruction, user_parts, request.temperature, request.max_output_tokens)
+            violation = self._check_guardrail_violation(raw_text)
+            parse_ok = self._is_valid_json(raw_text)
+            if violation or not parse_ok:
+                raise AIClientError(
+                    f"Model validation failed. Violation: {violation is not None}, Valid JSON: {parse_ok}"
+                )
+            retried = False
+            
         parsed = self._parse_json(raw_text)
+        
+        # Save to cache
+        try:
+            with open(cache_path, "w", encoding="utf-8") as f:
+                json.dump({
+                    "raw_text": raw_text,
+                    "parsed": parsed,
+                    "retried": retried
+                }, f, indent=2)
+        except Exception as e:
+            logger.error("Failed to write to cache: %s", e)
+            
         return AIResponse(raw_text=raw_text, parsed=parsed, retried=retried)
 
     def _build_system_prompt(self, extra: str) -> str:

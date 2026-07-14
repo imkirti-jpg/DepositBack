@@ -1,0 +1,66 @@
+{
+  "raw_text": "{\n  \"summary\": {\n    \"supported_amount\": 0,\n    \"unsupported_amount\": 850,\n    \"unclear_amount\": 150\n  },\n  \"claims\": [\n    {\n      \"title\": \"Carpet cleaning\",\n      \"amount\": 250,\n      \"verdict\": \"weak\",\n      \"confidence\": 0.8,\n      \"reasoning\": \"The lease requires the tenant to leave the property 'reasonably clean' upon move-out. While this clause could potentially cover cleaning if the carpet was left in an unreasonable condition, there is no move-out evidence provided to demonstrate that the carpet was not reasonably clean or required professional cleaning beyond normal wear and tear. The lease does not explicitly require professional carpet cleaning.\",\n      \"needed_evidence\": [\n        \"Move-out inspection report or photos showing the condition of the carpet at move-out.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_cleaning_requirement\",\n        \"clause_move_in_condition\"\n      ],\n      \"evidence_ids\": [\n        \"E1\",\n        \"E2\"\n      ]\n    },\n    {\n      \"title\": \"Wall repainting\",\n      \"amount\": 600,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 0.8,\n      \"reasoning\": \"The lease does not contain a clause making the tenant responsible for repainting. The tenancy duration was one year (January 1, 2026 - December 31, 2026). Repainting after a one-year tenancy is generally considered normal wear and tear, which is the landlord's responsibility. There is no move-out evidence provided to show specific damage to the walls beyond normal wear and tear that would justify repainting.\",\n      \"needed_evidence\": [\n        \"Move-out inspection report or photos showing specific damage to the walls beyond normal wear and tear.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_move_in_condition\"\n      ],\n      \"evidence_ids\": [\n        \"E1\",\n        \"E2\"\n      ]\n    },\n    {\n      \"title\": \"Trash removal\",\n      \"amount\": 150,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.7,\n      \"reasoning\": \"The lease explicitly states that the 'Landlord pays water and trash.' This indicates the landlord is responsible for regular trash services. While the tenant is required to leave the property 'reasonably clean,' which implies not leaving excessive personal trash, there is no move-out evidence provided to demonstrate that the tenant left an unreasonable amount of trash requiring special removal beyond the landlord's responsibility for trash services.\",\n      \"needed_evidence\": [\n        \"Move-out inspection report or photos showing excessive trash left by the tenant.\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_utilities\",\n        \"clause_cleaning_requirement\"\n      ],\n      \"evidence_ids\": [\n        \"E1\",\n        \"E2\"\n      ]\n    }\n  ]\n}",
+  "parsed": {
+    "summary": {
+      "supported_amount": 0,
+      "unsupported_amount": 850,
+      "unclear_amount": 150
+    },
+    "claims": [
+      {
+        "title": "Carpet cleaning",
+        "amount": 250,
+        "verdict": "weak",
+        "confidence": 0.8,
+        "reasoning": "The lease requires the tenant to leave the property 'reasonably clean' upon move-out. While this clause could potentially cover cleaning if the carpet was left in an unreasonable condition, there is no move-out evidence provided to demonstrate that the carpet was not reasonably clean or required professional cleaning beyond normal wear and tear. The lease does not explicitly require professional carpet cleaning.",
+        "needed_evidence": [
+          "Move-out inspection report or photos showing the condition of the carpet at move-out."
+        ],
+        "lease_clause_ids": [
+          "clause_cleaning_requirement",
+          "clause_move_in_condition"
+        ],
+        "evidence_ids": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "title": "Wall repainting",
+        "amount": 600,
+        "verdict": "unsupported",
+        "confidence": 0.8,
+        "reasoning": "The lease does not contain a clause making the tenant responsible for repainting. The tenancy duration was one year (January 1, 2026 - December 31, 2026). Repainting after a one-year tenancy is generally considered normal wear and tear, which is the landlord's responsibility. There is no move-out evidence provided to show specific damage to the walls beyond normal wear and tear that would justify repainting.",
+        "needed_evidence": [
+          "Move-out inspection report or photos showing specific damage to the walls beyond normal wear and tear."
+        ],
+        "lease_clause_ids": [
+          "clause_move_in_condition"
+        ],
+        "evidence_ids": [
+          "E1",
+          "E2"
+        ]
+      },
+      {
+        "title": "Trash removal",
+        "amount": 150,
+        "verdict": "unclear",
+        "confidence": 0.7,
+        "reasoning": "The lease explicitly states that the 'Landlord pays water and trash.' This indicates the landlord is responsible for regular trash services. While the tenant is required to leave the property 'reasonably clean,' which implies not leaving excessive personal trash, there is no move-out evidence provided to demonstrate that the tenant left an unreasonable amount of trash requiring special removal beyond the landlord's responsibility for trash services.",
+        "needed_evidence": [
+          "Move-out inspection report or photos showing excessive trash left by the tenant."
+        ],
+        "lease_clause_ids": [
+          "clause_utilities",
+          "clause_cleaning_requirement"
+        ],
+        "evidence_ids": [
+          "E1",
+          "E2"
+        ]
+      }
+    ]
+  },
+  "retried": false
+}

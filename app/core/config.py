@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     SUPABASE_JWKS_URL: str
     SUPABASE_URL: str
     GEMINI_MODEL:str
+    AI_ENABLED: bool = True
     STORAGE_BUCKET:str
     ENVIRONMENT:str
     MAX_UPLOAD_SIZE_MB:int

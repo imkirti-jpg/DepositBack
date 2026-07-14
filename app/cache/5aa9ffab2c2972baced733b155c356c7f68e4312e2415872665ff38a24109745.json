@@ -1,0 +1,58 @@
+{
+  "raw_text": "{\n  \"summary\": {\n    \"supported_amount\": 0,\n    \"unsupported_amount\": 850,\n    \"unclear_amount\": 150\n  },\n  \"claims\": [\n    {\n      \"title\": \"Carpet cleaning\",\n      \"amount\": 250,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 0.9,\n      \"reasoning\": \"The lease requires the tenant to leave the property \\\"reasonably clean\\\" (clause_cleaning_requirement) but does not mandate professional carpet cleaning. There is no evidence provided to demonstrate that the carpet was not left reasonably clean at move-out, nor is there evidence of its condition at move-in.\",\n      \"needed_evidence\": [\n        \"Move-out inspection report or photos showing the condition of the carpet at move-out\",\n        \"Invoice for professional cleaning\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_cleaning_requirement\"\n      ],\n      \"evidence_ids\": []\n    },\n    {\n      \"title\": \"Wall repainting\",\n      \"amount\": 600,\n      \"verdict\": \"unsupported\",\n      \"confidence\": 0.9,\n      \"reasoning\": \"The lease does not contain any clause requiring the tenant to repaint walls or explicitly making the tenant responsible for damage that would necessitate repainting. There is no evidence provided to show the condition of the walls at move-in or move-out, or to indicate damage beyond normal wear and tear.\",\n      \"needed_evidence\": [\n        \"Lease clause regarding tenant responsibility for wall damage or repainting\",\n        \"Move-in inspection report or photos showing wall condition\",\n        \"Move-out inspection report or photos showing wall condition\",\n        \"Invoice for repainting\"\n      ],\n      \"lease_clause_ids\": [],\n      \"evidence_ids\": []\n    },\n    {\n      \"title\": \"Trash removal\",\n      \"amount\": 150,\n      \"verdict\": \"unclear\",\n      \"confidence\": 0.7,\n      \"reasoning\": \"The lease states that the \\\"Landlord pays water and trash\\\" (clause_utilities), which typically refers to ongoing utility services. This clause does not explicitly address the removal of personal belongings or excessive trash left by the tenant at move-out. There is no evidence provided to demonstrate that the tenant left trash requiring removal.\",\n      \"needed_evidence\": [\n        \"Move-out inspection report or photos showing trash left behind by the tenant\",\n        \"Invoice for trash removal\"\n      ],\n      \"lease_clause_ids\": [\n        \"clause_utilities\"\n      ],\n      \"evidence_ids\": []\n    }\n  ]\n}",
+  "parsed": {
+    "summary": {
+      "supported_amount": 0,
+      "unsupported_amount": 850,
+      "unclear_amount": 150
+    },
+    "claims": [
+      {
+        "title": "Carpet cleaning",
+        "amount": 250,
+        "verdict": "unsupported",
+        "confidence": 0.9,
+        "reasoning": "The lease requires the tenant to leave the property \"reasonably clean\" (clause_cleaning_requirement) but does not mandate professional carpet cleaning. There is no evidence provided to demonstrate that the carpet was not left reasonably clean at move-out, nor is there evidence of its condition at move-in.",
+        "needed_evidence": [
+          "Move-out inspection report or photos showing the condition of the carpet at move-out",
+          "Invoice for professional cleaning"
+        ],
+        "lease_clause_ids": [
+          "clause_cleaning_requirement"
+        ],
+        "evidence_ids": []
+      },
+      {
+        "title": "Wall repainting",
+        "amount": 600,
+        "verdict": "unsupported",
+        "confidence": 0.9,
+        "reasoning": "The lease does not contain any clause requiring the tenant to repaint walls or explicitly making the tenant responsible for damage that would necessitate repainting. There is no evidence provided to show the condition of the walls at move-in or move-out, or to indicate damage beyond normal wear and tear.",
+        "needed_evidence": [
+          "Lease clause regarding tenant responsibility for wall damage or repainting",
+          "Move-in inspection report or photos showing wall condition",
+          "Move-out inspection report or photos showing wall condition",
+          "Invoice for repainting"
+        ],
+        "lease_clause_ids": [],
+        "evidence_ids": []
+      },
+      {
+        "title": "Trash removal",
+        "amount": 150,
+        "verdict": "unclear",
+        "confidence": 0.7,
+        "reasoning": "The lease states that the \"Landlord pays water and trash\" (clause_utilities), which typically refers to ongoing utility services. This clause does not explicitly address the removal of personal belongings or excessive trash left by the tenant at move-out. There is no evidence provided to demonstrate that the tenant left trash requiring removal.",
+        "needed_evidence": [
+          "Move-out inspection report or photos showing trash left behind by the tenant",
+          "Invoice for trash removal"
+        ],
+        "lease_clause_ids": [
+          "clause_utilities"
+        ],
+        "evidence_ids": []
+      }
+    ]
+  },
+  "retried": false
+}

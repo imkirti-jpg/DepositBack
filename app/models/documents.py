@@ -35,6 +35,8 @@ class GeneratedDocument(Base):
     status: Mapped[DocStatus] = mapped_column(
         Enum(DocStatus, name="doc_status"), nullable=False, default=DocStatus.processing
     )
+    is_active: Mapped[bool] = mapped_column(nullable=False, default=True, server_default="true", index=True)
+    error_message: Mapped[str | None] = mapped_column(Text, nullable=True)
     ai_draft: Mapped[str | None] = mapped_column(Text, nullable=True)
     edited_content: Mapped[str | None] = mapped_column(
         Text, nullable=True,

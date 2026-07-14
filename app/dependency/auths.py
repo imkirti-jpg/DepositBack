@@ -45,7 +45,10 @@ async def get_current_user(
     except Exception as e:
         import traceback
         traceback.print_exc()
-        raise
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid token or authentication failed",
+        )
     
     
     profile = await UserProvisioningService.provision_user(
