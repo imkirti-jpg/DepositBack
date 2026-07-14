@@ -276,7 +276,7 @@ dashboard.py — single GET /properties/{id}/dashboard endpoint.
 Assembles a complete case snapshot from the seven tables built in phases 1-6.
 Nothing is stored here — everything is computed on read.
 
-next_action is the most important field for the frontend:
+next_action is an important field for the frontend:
 it tells the user exactly what to do next in one sentence,
 derived from the current state of their case.
 """
