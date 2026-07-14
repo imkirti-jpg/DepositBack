@@ -7,3 +7,6 @@ venv/
 alembic.ini
 __pycache__/
 *.py[cod]
+plan.md
+plan2.md
+frontend-architecture-review.md
