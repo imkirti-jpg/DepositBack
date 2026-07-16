@@ -3,8 +3,8 @@ import 'dotenv/config';
 import type { ExpoConfig } from 'expo/config';
 
 const config: ExpoConfig = {
-  name: 'frontend',
-  slug: 'frontend',
+  name: 'DepositBack',
+  slug: 'depositback',
   scheme: 'depositback',
   version: '1.0.0',
   orientation: 'portrait',
